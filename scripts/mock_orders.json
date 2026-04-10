@@ -1,0 +1,86 @@
+[
+  {
+    "sourceOrderId": "10001",
+    "createdAt": "2026-04-08 10:15:00",
+    "countryIso": "US",
+    "utmSource": "instagram",
+    "customer": {
+      "firstName": "Ava",
+      "lastName": "Stone",
+      "phone": "+12025550101",
+      "email": "ava.stone@example.test",
+      "city": "Brooklyn"
+    },
+    "deliveryAddress": "145 Atlantic Ave, Brooklyn, NY",
+    "customerComment": "Mock import order for Milestone 3 validation.",
+    "items": [
+      {
+        "sourceItemId": "10001-1",
+        "productName": "Signature Hoodie",
+        "sku": "SIG-HOODIE-BLK-M",
+        "quantity": 1,
+        "unitPrice": 129.99
+      },
+      {
+        "sourceItemId": "10001-2",
+        "productName": "Sticker Pack",
+        "sku": "STICKER-PACK-01",
+        "quantity": 2,
+        "unitPrice": 4.5
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "10002",
+    "createdAt": "2026-04-08 12:40:00",
+    "countryIso": "US",
+    "utmSource": "google",
+    "customer": {
+      "firstName": "Maya",
+      "lastName": "Foster",
+      "phone": "+12025550102",
+      "email": "maya.foster@example.test",
+      "city": "Austin"
+    },
+    "deliveryAddress": "2401 E 6th St, Austin, TX",
+    "items": [
+      {
+        "sourceItemId": "10002-1",
+        "productName": "Oversized Tee",
+        "sku": "TEE-OVR-WHT-L",
+        "quantity": 2,
+        "unitPrice": 38
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "10003",
+    "createdAt": "2026-04-09 09:05:00",
+    "countryIso": "US",
+    "utmSource": "newsletter",
+    "customer": {
+      "firstName": "Noah",
+      "lastName": "Cole",
+      "phone": "+12025550103",
+      "email": "noah.cole@example.test",
+      "city": "Chicago"
+    },
+    "deliveryAddress": "1130 W Monroe St, Chicago, IL",
+    "items": [
+      {
+        "sourceItemId": "10003-1",
+        "productName": "Canvas Tote",
+        "sku": "TOTE-CANVAS-01",
+        "quantity": 1,
+        "unitPrice": 24.99
+      },
+      {
+        "sourceItemId": "10003-2",
+        "productName": "Cap",
+        "sku": "CAP-NAVY-01",
+        "quantity": 1,
+        "unitPrice": 22.5
+      }
+    ]
+  }
+]

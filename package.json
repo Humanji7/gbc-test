@@ -1,0 +1,29 @@
+{
+  "name": "gbc-test",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "next typegen && tsc --noEmit",
+    "import:mock-orders": "node --env-file-if-exists=.env.local --env-file-if-exists=.env scripts/import-mock-orders.ts",
+    "sync:retailcrm-to-supabase": "node --env-file-if-exists=.env.local --env-file-if-exists=.env scripts/sync-retailcrm-to-supabase.ts",
+    "alerts:telegram": "node --env-file-if-exists=.env.local --env-file-if-exists=.env scripts/send-high-value-telegram-alerts.ts"
+  },
+  "dependencies": {
+    "next": "16.2.3",
+    "react": "19.2.5",
+    "react-dom": "19.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "25.5.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

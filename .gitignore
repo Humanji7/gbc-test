@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+*.swp
+*.swo
+.DS_Store
+node_modules/
+.next/
+.vercel/
+dist/
+coverage/
+tsconfig.tsbuildinfo

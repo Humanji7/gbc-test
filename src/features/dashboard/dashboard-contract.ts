@@ -1,0 +1,1 @@
+export const DASHBOARD_RECENT_ORDERS_LIMIT = 5;
