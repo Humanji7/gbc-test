@@ -2,18 +2,20 @@
 
 ## Acceptance Criteria
 
-The pre-deploy final pass is complete when:
+The final submission pass is complete when:
 
-- the whole project is reviewed for deploy readiness
-- real blockers or stale docs are fixed without widening scope
-- validation is rerun for the relevant local checks
-- the remaining unknowns before deploy are written down explicitly
+- the repo is published and reviewable
+- the app is deployed publicly
+- submission docs match the real deployed state
+- the remaining unknowns are written down explicitly
 
 ## Required Validation
 
 - `npm run typecheck`
 - `npm run build`
 - `npm audit --audit-level=low`
+- deployed `/api/health` responds successfully
+- deployed `/` responds successfully
 - any additional real checks run in this session are recorded honestly
 - remaining gaps, if any, are written down explicitly
 

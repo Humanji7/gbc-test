@@ -2,7 +2,7 @@
 
 This repository contains a lightweight, production-minded integration project for the GBEMPIRE AI Tools Specialist test.
 
-Milestones 3 through 6 now cover the full internal flow: mock orders can be imported into RetailCRM with stable `externalId` values, those same orders can be synced server-side into Supabase without duplicating rows on rerun, qualifying Supabase orders can trigger duplicate-safe Telegram alerts, and the dashboard renders core business metrics from Supabase.
+Milestones 3 through 7 cover the full required flow: mock orders can be imported into RetailCRM with stable `externalId` values, those same orders can be synced server-side into Supabase without duplicating rows on rerun, qualifying Supabase orders can trigger duplicate-safe Telegram alerts, and the dashboard is deployed publicly on Vercel with core business metrics from Supabase.
 
 ## Stack
 
@@ -11,6 +11,11 @@ Milestones 3 through 6 now cover the full internal flow: mock orders can be impo
 - Supabase
 - RetailCRM API
 - Telegram Bot API
+
+## Submission Links
+
+- GitHub repo: [https://github.com/Humanji7/gbc-test](https://github.com/Humanji7/gbc-test)
+- Public dashboard: [https://gbc-test-rho.vercel.app](https://gbc-test-rho.vercel.app)
 
 ## Current Status
 
@@ -31,10 +36,8 @@ Implemented so far:
 - `notification_log` usage for one-send-per-order alert deduplication
 - explicit RLS enablement in `supabase/schema.sql` for all project tables before deploy
 - server-rendered dashboard on `/` with KPI cards, source breakdown, city breakdown, and recent orders from Supabase
-
-Intentionally not implemented yet:
-
-- deploy flow
+- Vercel deploy setup with production env wiring
+- public deploy available at `https://gbc-test-rho.vercel.app`
 
 ## Что Должно Быть В Финальной Сдаче
 
@@ -52,7 +55,7 @@ Intentionally not implemented yet:
   - что реально проверено
   - что осталось ограничением или tradeoff
 
-До deploy проект подготовлен, но публичный URL и post-deploy verification пока не добавлены.
+Сейчас финальная сдача уже включает и репозиторий, и публичный URL, и честно зафиксированную validation story.
 
 ## Reviewer Path
 
@@ -69,7 +72,8 @@ Intentionally not implemented yet:
    - `src/app/page.tsx`
    - `src/features/dashboard/get-dashboard-data.ts`
    - `src/features/dashboard/dashboard-snapshot.ts`
-6. Свериться с текущим handoff в [HANDOFF.md](./HANDOFF.md) и QA-статусом в [QA.md](./QA.md).
+6. Открыть публичный deploy: [https://gbc-test-rho.vercel.app](https://gbc-test-rho.vercel.app).
+7. Свериться с текущим handoff в [HANDOFF.md](./HANDOFF.md) и QA-статусом в [QA.md](./QA.md).
 
 ## Как Я Использовал AI В Этом Проекте
 
@@ -172,7 +176,7 @@ Schema validation options:
 - `supabase db query --linked -f supabase/schema.sql`
 - `psql "$SUPABASE_DB_URL" -f supabase/schema.sql`
 
-Pre-deploy checks already completed in the latest preparation pass:
+Pre-deploy checks completed in the latest preparation pass:
 
 - `npm run typecheck`
 - `npm run build`
@@ -183,11 +187,18 @@ Pre-deploy checks already completed in the latest preparation pass:
   - missing `order_items.external_item_id`
   - `notification_log` statuses
 
-Still intentionally not re-run in the latest preparation pass:
+Deploy checks completed:
+
+- Vercel production env vars are configured for the deployed project
+- production deploy finished successfully
+- public `/api/health` returned `200`
+- public `/` returned `200`
+- the public dashboard was also opened in a real browser pass for a visual sanity check
+
+Still intentionally not re-run in the final submission pass:
 
 - live sync mutation
 - live Telegram send mutation
-- public deploy verification
 
 ## Import Notes
 
@@ -215,9 +226,9 @@ Still intentionally not re-run in the latest preparation pass:
 - If Telegram may already have accepted a message but the final `sent` write cannot be persisted, the row is moved into `delivery_unknown` and automatic retries stop until manual review. This deliberately prefers duplicate-safety over blind resend behavior.
 - Alert messages keep personal data minimal by sending order id, amount, status, masked initials, and city only.
 
-## Next Milestone
+## Final State
 
-Milestone 7 should add deploy and submission packaging work without changing the completed Milestone 6 dashboard slice.
+The project is ready for review and submission in its current state. The clean public URL to use in the submission is [https://gbc-test-rho.vercel.app](https://gbc-test-rho.vercel.app).
 
 ## Submission Checklist
 
