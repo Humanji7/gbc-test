@@ -45,4 +45,4 @@ The major reviewer-visible mismatch from the previous pass is now closed, and th
 
 ## Recommended next skill
 
-- `github:yeet` if you want to publish the current local submission state to GitHub before handing over the repo link.
+- none required for submission in the current state
