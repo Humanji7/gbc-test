@@ -92,7 +92,7 @@ function maskCustomerName(firstName: string | null, lastName: string | null): st
   const lastInitial = lastName?.trim().charAt(0).toUpperCase();
   const parts = [firstInitial, lastInitial].filter(Boolean);
 
-  return parts.length > 0 ? parts.map((part) => `${part}.`).join(" ") : "n/a";
+  return parts.length > 0 ? parts.map((part) => `${part}.`).join(" ") : "нет данных";
 }
 
 function formatMoney(amount: number, currency: string | null): string {
@@ -100,7 +100,7 @@ function formatMoney(amount: number, currency: string | null): string {
 
   if (normalizedCurrency && normalizedCurrency.length === 3) {
     try {
-      return new Intl.NumberFormat("en-US", {
+      return new Intl.NumberFormat("ru-RU", {
         style: "currency",
         currency: normalizedCurrency,
         minimumFractionDigits: 2,
@@ -114,6 +114,18 @@ function formatMoney(amount: number, currency: string | null): string {
   return amount.toFixed(2);
 }
 
+function formatAlertDate(value: string | null): string {
+  if (!value) {
+    return "нет данных";
+  }
+
+  return new Intl.DateTimeFormat("ru-RU", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "UTC"
+  }).format(new Date(value));
+}
+
 function buildNotificationKey(externalId: string): string {
   return `${HIGH_VALUE_TELEGRAM_NOTIFICATION_TYPE}:${externalId}`;
 }
@@ -123,17 +135,17 @@ function formatAlertMessage(order: QualifyingOrderRow, threshold: number): strin
   const orderLabel = order.order_number?.trim() || order.external_id;
 
   return [
-    "GBEMPIRE high-value order alert",
-    `Order: ${orderLabel}`,
-    `External ID: ${order.external_id}`,
-    `Amount: ${formatMoney(totalAmount, order.currency)}`,
-    `Threshold: > ${threshold.toFixed(2)}`,
-    "Reason: Order total is above the configured high-value threshold.",
-    `Status: ${order.status}`,
-    `Customer: ${maskCustomerName(order.customer_first_name, order.customer_last_name)}`,
-    `City: ${order.city ?? "n/a"}`,
-    `Created at source: ${order.created_at_source ?? "n/a"}`,
-    "Next step: Review the order in CRM and confirm that priority handling is needed."
+    "GBEMPIRE: алерт по крупному заказу",
+    `Заказ: ${orderLabel}`,
+    `Внешний ID: ${order.external_id}`,
+    `Сумма: ${formatMoney(totalAmount, order.currency)}`,
+    `Порог: > ${formatMoney(threshold, order.currency)}`,
+    "Причина: сумма заказа выше настроенного порога для крупного заказа.",
+    `Статус: ${order.status}`,
+    `Клиент: ${maskCustomerName(order.customer_first_name, order.customer_last_name)}`,
+    `Город: ${order.city ?? "нет данных"}`,
+    `Создан у источника: ${formatAlertDate(order.created_at_source)}`,
+    "Следующий шаг: откройте заказ в CRM и подтвердите, нужна ли приоритетная обработка."
   ].join("\n");
 }
 
