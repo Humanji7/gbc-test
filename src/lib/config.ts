@@ -1,7 +1,6 @@
-import { CURRENT_MILESTONE, HIGH_VALUE_ORDER_THRESHOLD } from "@/lib/constants";
+import { HIGH_VALUE_ORDER_THRESHOLD } from "@/lib/constants";
 
 export const projectConfig = {
-  currentMilestone: CURRENT_MILESTONE,
   highValueOrderThreshold: HIGH_VALUE_ORDER_THRESHOLD,
   plannedCapabilities: [
     "Импорт заказов",

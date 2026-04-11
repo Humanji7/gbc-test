@@ -56,7 +56,6 @@ export default async function HomePage() {
   return (
     <main className="page-shell">
       <header className="hero">
-        <div className="eyebrow">{projectConfig.currentMilestone}</div>
         <h1>{publicEnv.appName}</h1>
         <p>
           Компактный бизнес-дашборд по заказам: основные показатели, структура выручки и

@@ -2,7 +2,7 @@
 
 ## Task summary
 
-The core project is complete through Milestone 7, including deploy and submission packaging.
+The core project is complete through Milestone 7, including deploy and submission packaging, and the final docs/package consistency pass is now applied.
 
 ## Current status
 
@@ -13,17 +13,24 @@ The core project is complete through Milestone 7, including deploy and submissio
 - the schema now explicitly enables RLS on all project tables
 - the repo is pushed to GitHub at `https://github.com/Humanji7/gbc-test`
 - the app is deployed publicly at `https://gbc-test-rho.vercel.app`
+- the public app no longer exposes milestone labels in the dashboard or `/api/health`
+- the README reviewer path now points reviewers to README and QA first, with the technical spec framed explicitly as Milestone 6 architecture context
+- the README now has a dedicated `Known Limitations / Tradeoffs` section for reviewer scanning
+- local packaging now sets an explicit `turbopack.root`, so `npm run build` no longer warns about the wrong workspace root
 
 ## Validation status
 
 - completed in this session:
+  - remove public milestone labeling from the dashboard and `/api/health`
+  - tighten the README reviewer path wording
+  - add a dedicated README tradeoffs section
+  - set an explicit `turbopack.root` in `next.config.ts`
   - `npm run typecheck`
   - `npm run build`
+  - `vercel --prod --yes`
   - `npm audit --audit-level=low`
-  - `curl -iL https://gbc-test-rho.vercel.app/api/health`
-  - `curl -iL https://gbc-test-rho.vercel.app`
-  - browser sanity check against the public dashboard
-  - Vercel production env presence check
+  - `curl -sSL https://gbc-test-rho.vercel.app/api/health`
+  - `curl -sSL https://gbc-test-rho.vercel.app`
 - completed earlier in the final prep pass:
   - `npm run import:mock-orders -- --dry-run`
   - read-only Supabase REST sanity check for recent orders, missing `external_item_id`, and `notification_log` status counts

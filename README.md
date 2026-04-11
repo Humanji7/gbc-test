@@ -61,19 +61,20 @@ Implemented so far:
 
 Если нужно быстро проверить проект руками:
 
-1. Прочитать [docs/technical-spec.md](./docs/technical-spec.md) для архитектурной рамки.
-2. Посмотреть env contract в [.env.example](./.env.example).
-3. Посмотреть database shape в [supabase/schema.sql](./supabase/schema.sql).
-4. Проверить scripts:
+1. Начать с этого README и [QA.md](./QA.md): это текущая финальная submission-story и честный статус проверки.
+2. Прочитать [docs/technical-spec.md](./docs/technical-spec.md) как архитектурную рамку через Milestone 6.
+3. Посмотреть env contract в [.env.example](./.env.example).
+4. Посмотреть database shape в [supabase/schema.sql](./supabase/schema.sql).
+5. Проверить scripts:
    - `scripts/import-mock-orders.ts`
    - `scripts/sync-retailcrm-to-supabase.ts`
    - `scripts/send-high-value-telegram-alerts.ts`
-5. Открыть dashboard-код:
+6. Открыть dashboard-код:
    - `src/app/page.tsx`
    - `src/features/dashboard/get-dashboard-data.ts`
    - `src/features/dashboard/dashboard-snapshot.ts`
-6. Открыть публичный deploy: [https://gbc-test-rho.vercel.app](https://gbc-test-rho.vercel.app).
-7. Свериться с текущим handoff в [HANDOFF.md](./HANDOFF.md) и QA-статусом в [QA.md](./QA.md).
+7. Открыть публичный deploy: [https://gbc-test-rho.vercel.app](https://gbc-test-rho.vercel.app).
+8. Свериться с текущим handoff в [HANDOFF.md](./HANDOFF.md) для next-step context, если он вообще нужен.
 
 ## Как Я Использовал AI В Этом Проекте
 
@@ -199,6 +200,14 @@ Still intentionally not re-run in the final submission pass:
 
 - live sync mutation
 - live Telegram send mutation
+
+## Known Limitations / Tradeoffs
+
+- The technical spec in [docs/technical-spec.md](./docs/technical-spec.md) is the architecture frame through Milestone 6, not the source of truth for the current deploy state. The current deploy/review state lives in this README plus [QA.md](./QA.md).
+- The final submission pass revalidated safe checks (`typecheck`, `build`, `audit`, dry-run import, and public HTTP reachability), but it intentionally did not rerun live sync mutation or live Telegram delivery to avoid side effects in external systems.
+- Dashboard freshness depends on the currently connected Supabase project state. The public URL is live and checked, but the exact metrics can change if the backing data changes later.
+- The sync design deliberately favors full stable-id reconciliation over an undocumented incremental delta filter in RetailCRM. This keeps behavior reviewable and safer for the test scope, but it is less efficient than a trustworthy delta feed would be.
+- Duplicate-safety for Telegram alerts is intentionally prioritized over blind retry behavior. If delivery persistence becomes uncertain after Telegram may already have accepted a message, the project stops automatic retries and requires manual review.
 
 ## Import Notes
 
