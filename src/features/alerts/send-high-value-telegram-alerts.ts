@@ -133,19 +133,22 @@ function buildNotificationKey(externalId: string): string {
 function formatAlertMessage(order: QualifyingOrderRow, threshold: number): string {
   const totalAmount = coerceMoney(order.total_amount, `Supabase order ${order.external_id} total_amount`);
   const orderLabel = order.order_number?.trim() || order.external_id;
+  const customer = maskCustomerName(order.customer_first_name, order.customer_last_name);
+  const city = order.city?.trim() || "нет данных";
+  const sourceDate = formatAlertDate(order.created_at_source);
 
   return [
-    "GBEMPIRE: алерт по крупному заказу",
-    `Заказ: ${orderLabel}`,
-    `Внешний ID: ${order.external_id}`,
-    `Сумма: ${formatMoney(totalAmount, order.currency)}`,
-    `Порог: > ${formatMoney(threshold, order.currency)}`,
-    "Причина: сумма заказа выше настроенного порога для крупного заказа.",
+    "Крупный заказ в GBEMPIRE",
+    "",
+    `${orderLabel} на ${formatMoney(totalAmount, order.currency)}`,
     `Статус: ${order.status}`,
-    `Клиент: ${maskCustomerName(order.customer_first_name, order.customer_last_name)}`,
-    `Город: ${order.city ?? "нет данных"}`,
-    `Создан у источника: ${formatAlertDate(order.created_at_source)}`,
-    "Следующий шаг: откройте заказ в CRM и подтвердите, нужна ли приоритетная обработка."
+    `Клиент: ${customer}`,
+    `Город: ${city}`,
+    `Создан: ${sourceDate}`,
+    `ID: ${order.external_id}`,
+    "",
+    `Порог контроля: > ${formatMoney(threshold, order.currency)}`,
+    "Действие: откройте заказ в CRM и проверьте, нужна ли приоритетная обработка."
   ].join("\n");
 }
 

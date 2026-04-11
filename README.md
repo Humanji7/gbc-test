@@ -1,15 +1,15 @@
 # GBEMPIRE Test Project
 
-Compact, production-minded integration project for the GBEMPIRE AI Tools Specialist test.
+Небольшой, аккуратный интеграционный проект для тестового задания GBEMPIRE AI Tools Specialist.
 
-This submission is intentionally small and reviewable. It covers the required business flow end to end:
+Проект специально сделан компактным и удобным для ревью. Он закрывает весь требуемый flow:
 
-- import 50 mock orders into RetailCRM with stable `externalId`
-- sync those orders into Supabase without duplicate rows on rerun
-- send duplicate-safe Telegram alerts for orders above `50_000`
-- expose core business metrics, a real chart, and operational status in a public dashboard
+- импорт 50 mock orders в RetailCRM со стабильными `externalId`
+- sync этих заказов в Supabase без дублей на повторном запуске
+- duplicate-safe Telegram alerts для заказов выше `50_000`
+- публичный dashboard с ключевыми метриками, реальным графиком и операционным срезом
 
-## Stack
+## Стек
 
 - Next.js
 - TypeScript
@@ -17,159 +17,216 @@ This submission is intentionally small and reviewable. It covers the required bu
 - RetailCRM API
 - Telegram Bot API
 
-## Submission Links
+## Ссылки
 
 - GitHub repo: [https://github.com/Humanji7/gbc-test](https://github.com/Humanji7/gbc-test)
-- Public dashboard: [https://gbc-test-rho.vercel.app](https://gbc-test-rho.vercel.app)
-- Structured ops summary: [https://gbc-test-rho.vercel.app/api/ops-summary](https://gbc-test-rho.vercel.app/api/ops-summary)
+- Публичный dashboard: [https://gbc-test-rho.vercel.app](https://gbc-test-rho.vercel.app)
+- Структурированный ops summary: [https://gbc-test-rho.vercel.app/api/ops-summary](https://gbc-test-rho.vercel.app/api/ops-summary)
 
-## What This Submission Delivers
+## Что Входит В Сдачу
 
-- repository with schema, scripts, server-side integration code, and reviewer-facing docs
-- committed `scripts/mock_orders.json` fixture with 50 valid orders
-- fixture includes 6 orders above `50_000` and 1 boundary order at exactly `50_000` for threshold validation
-- stable-id import path for mock RetailCRM orders
+- репозиторий с понятным кодом, schema, scripts и документацией для ревью
+- committed `scripts/mock_orders.json` с 50 валидными заказами
+- 6 заказов выше `50_000` и 1 boundary order ровно на `50_000` для проверки strict threshold
+- путь импорта со стабильными id для mock-заказов в RetailCRM
 - duplicate-safe RetailCRM -> Supabase reconciliation
-- duplicate-safe Telegram high-value alert flow at the brief threshold of `> 50_000`
-- public deploy with real dashboard data from Supabase, including a server-rendered chart
-- explicit separation between confirmed validation and remaining unknowns
+- duplicate-safe Telegram high-value alerts при пороге `> 50_000`
+- публичный deploy с реальными данными из Supabase и серверным графиком
+- явное разделение между тем, что реализовано, что реально проверено и что остаётся ограничением или компромиссом
 
-## Business Flow
+## Бизнес-Флоу
 
 1. `npm run import:mock-orders`
 
-Creates any missing mock orders in RetailCRM using stable fixture-owned `externalId` values.
+Создаёт отсутствующие mock orders в RetailCRM, используя стабильные fixture-owned `externalId`.
 
 2. `npm run sync:retailcrm-to-supabase`
 
-Fetches the expected RetailCRM orders by those stable ids and upserts `orders` plus `order_items` into Supabase.
+Забирает ожидаемые RetailCRM orders по этим стабильным ids и делает upsert в `orders` и `order_items` в Supabase.
 
 3. `npm run alerts:telegram`
 
-Reads qualifying Supabase orders above `50_000` and sends Telegram alerts with persistent deduplication through `notification_log`.
+Читает qualifying orders из Supabase выше `50_000` и отправляет Telegram alerts с постоянной дедупликацией через `notification_log`.
 
-4. Public dashboard and ops summary
+4. Public dashboard и ops summary
 
-`/` shows KPIs, a real daily revenue chart, and a lightweight operator view. The dashboard reads the current committed fixture-backed order slice from Supabase so the public totals stay aligned with the 50-order brief dataset. `/api/ops-summary` exposes sync and alert state in a structured form without secrets.
+`/` показывает KPI, реальный график дневной выручки и лёгкий операторский срез. Dashboard читает текущий fixture-backed slice из Supabase, чтобы публичные totals совпадали с 50-order dataset. `/api/ops-summary` отдаёт sync и alert state в структурированном виде без секретов.
 
-## Operator / Ops Notes
+## Операторские Заметки
 
-- If `failed > 0`, inspect the recorded error first, then rerun the alert script.
-- If `delivery_unknown > 0`, do not blind-retry. Manual delivery review comes first.
-- If `sync_state.last_cursor` is not empty, treat the previous sync as interrupted and rerun safely.
-- The dashboard is a lightweight operating slice, not a full backoffice queue.
+- Если `failed > 0`, сначала смотри записанную ошибку, потом перезапускай alert script.
+- Если `delivery_unknown > 0`, не делай blind retry. Сначала нужна ручная проверка доставки.
+- Если `sync_state.last_cursor` не пустой, считай, что прошлый sync был прерван, и перезапускай безопасно.
+- Dashboard здесь специально узкий: это внутренний операционный срез, а не full backoffice queue.
 
-## Reviewer Path
+## Как Быстро Проверить Проект
 
-Fastest review path:
+Самый быстрый путь для ревью:
 
-1. Read this README and [QA.md](./QA.md).
-2. Open the public dashboard and [ops summary endpoint](https://gbc-test-rho.vercel.app/api/ops-summary).
-3. Check the schema in [supabase/schema.sql](./supabase/schema.sql).
-4. Check the integration entry points:
+1. Прочитать этот README и [QA.md](./QA.md).
+2. Открыть публичный dashboard и [ops summary endpoint](https://gbc-test-rho.vercel.app/api/ops-summary).
+3. Посмотреть схему в [supabase/schema.sql](./supabase/schema.sql).
+4. Посмотреть основные integration entry points:
    - `scripts/import-mock-orders.ts`
    - `scripts/sync-retailcrm-to-supabase.ts`
    - `scripts/send-high-value-telegram-alerts.ts`
-5. Check the main server-side reads:
+5. Посмотреть основные server-side reads:
    - `src/features/orders/`
    - `src/features/dashboard/get-dashboard-data.ts`
    - `src/app/page.tsx`
 
-## How AI Was Used
+## Как Я Использовал AI
 
-AI was used as an accelerator, not as an autopilot.
+AI использовался как ускоритель, а не как автопилот.
 
-- Work was split into narrow milestone-sized sessions with explicit scope and validation.
-- AI was used both for implementation and for adversarial review passes.
-- Human judgment stayed on architecture, idempotency, duplicate-safety, validation boundaries, and tradeoffs.
+- Работа была разбита на узкие майлстоуны с явным scope и validation.
+- AI использовался и для реализации, и для жёстких review-проходов.
+- Человеческое решение оставалось на архитектуре, idempotency, duplicate-safety, validation boundaries и tradeoffs.
 
-The most important non-autopilot choices in this project were:
+Самые важные не-автопилотные решения в проекте:
 
-- using stable-id full reconciliation instead of pretending there is a safe RetailCRM delta feed
-- preferring duplicate-safety over blind Telegram retries
-- keeping privileged credentials server-side only
-- making the alert-trigger interpretation explicit instead of hiding it behind vague wording
+- использовать stable-id full reconciliation вместо вида, что у RetailCRM есть безопасный delta feed
+- предпочесть duplicate-safety вместо blind Telegram retries
+- держать privileged credentials только на сервере
+- явно зафиксировать трактовку alert trigger semantics вместо размытой формулировки
 
-## Quick Start
+## Примеры Промптов
 
-1. Copy `.env.example` into `.env.local`.
-2. Install dependencies with `npm install --ignore-scripts`.
-3. Start the app with `npm run dev`.
-4. Run `npm run import:mock-orders`.
-5. Run `npm run sync:retailcrm-to-supabase`.
-6. Run `npm run alerts:telegram`.
+Ниже несколько реальных промптов из хода работы. Именно такой стиль запросов я использовал, чтобы вести проект по шагам, а не “генерить всё разом”.
 
-Useful direct commands:
+Пример 1: старт работы над тестовым
+
+```text
+подготовимся к выполнению тестового, изучи ваку и тестовое. вернись с предложением поб идеальном решении
+```
+
+Пример 2: сборка общего процесса работы
+
+```text
+мф строим с тобой, поэтому промпты будем использовать те, что будут стратовать с начала проектирования спецификации и до конца, до этапа деплоя и тестов. Следюущим шагом вижу построение плейбука моего с тобой, чтобы я не сбился по пути. учитывай свои способности, что ты делаешь майлстоун за сессию и прочие устанволенные рамки работы
+```
+
+Пример 3: старт первого технического майлстоуна
+
+```text
+Start milestone 1 and draft the technical spec plus repository scaffold. Use the approved stack from AGENTS.md, keep the solution lightweight, create the initial Next.js/TypeScript project structure, add a safe server/client env contract, and leave the repo ready for Milestone 2 without introducing unnecessary dependencies.
+```
+
+Пример 4: добивание Milestone 4 до подтверждённого состояния
+
+```text
+Проверь и добей Milestone 4 до полностью подтвержденного состояния в /Users/admin/projects/gbc_test:
+
+1. примени обновленную schema.sql к Supabase,
+2. запусти sync RetailCRM -> Supabase,
+3. сразу запусти sync второй раз,
+4. проверь, что дубликаты не появились,
+5. проверь, что sync_state обновляется корректно,
+6. коротко зафиксируй результат в HANDOFF.md и QA.md,
+7. ничего не делай по Telegram, dashboard и deploy.
+```
+
+Пример 5: строгий review без фиксов
+
+```text
+Проведи строгий code review Milestone 5 в /Users/admin/projects/gbc_test без внесения изменений. Сфокусируйся на bugs, рисках, регрессиях, безопасности server-only env, duplicate-safety Telegram alerts и корректности notification_log retry/dedup semantics. Проверь новые файлы и связанные изменения в docs/config/UI, укажи findings по severity с точными file/line references, отдельно перечисли validation gaps и residual risks. Ничего не исправляй.
+```
+
+## С Какими Сложностями Столкнулся
+
+Проект в целом шёл ровно: scope был узкий, стек простой, без лишней инфраструктуры. Основные сложности были вокруг подтверждения корректности интеграции: настроить внешние доступы, проверить защиту от дублей на повторных прогонах и отделить реально подтверждённое поведение от предположений.
+
+## Как Решал
+
+Решал это через маленькие майлстоуны с жёстким scope, повторные прогоны ключевых сценариев и отдельные review-проходы по рискам.
+
+## Быстрый Старт
+
+1. Скопировать `.env.example` в `.env.local`.
+2. Установить зависимости через `npm install --ignore-scripts`.
+3. Запустить приложение через `npm run dev`.
+4. Импортировать mock orders через `npm run import:mock-orders`.
+5. Синхронизировать их в Supabase через `npm run sync:retailcrm-to-supabase`.
+6. Отправить qualifying Telegram alerts через `npm run alerts:telegram`.
+
+Полезные команды:
 
 - `npm run import:mock-orders`
 - `npm run sync:retailcrm-to-supabase`
 - `npm run alerts:telegram`
 
-## Validation Story
+## История Валидации
 
-Rerun in the final brief-alignment pass on April 11, 2026:
+Финальный pass по буквальному выравниванию под бриф от April 11, 2026:
 
 - `npm run typecheck`
 - `npm run build`
 - `npm audit --audit-level=low`
 - `npm run import:mock-orders`
-- immediate rerun of `npm run import:mock-orders`
+- immediate rerun `npm run import:mock-orders`
 - `npm run sync:retailcrm-to-supabase`
-- immediate rerun of `npm run sync:retailcrm-to-supabase`
+- immediate rerun `npm run sync:retailcrm-to-supabase`
 - `npm run alerts:telegram`
-- immediate rerun of `npm run alerts:telegram`
-- deployed `/` check on [https://gbc-test-rho.vercel.app](https://gbc-test-rho.vercel.app)
-- deployed page visibly includes the `Выручка по дням` chart and the `Крупные заказы (> 50 000)` KPI copy
+- immediate rerun `npm run alerts:telegram`
+- проверка deployed `/` на [https://gbc-test-rho.vercel.app](https://gbc-test-rho.vercel.app)
+- визуальное подтверждение, что на странице есть `Выручка по дням` и KPI `Крупные заказы (> 50 000)`
 
-Observed results from that pass:
+Наблюдаемые результаты того прохода:
 
-- import run created 50 orders; immediate rerun skipped the same 50 by stable `externalId`
-- sync run inserted 50 orders and 81 line items; immediate rerun updated the same rows without creating duplicates
-- alert run found exactly 6 qualifying orders above `50_000` and sent 6 Telegram messages
-- immediate alert rerun skipped the same 6 orders as already sent
-- the exact-`50_000` boundary order did not qualify, matching the strict `>` rule
-- the deployed dashboard shows 50 orders and a real Supabase-backed daily revenue chart
+- import создал 50 orders; immediate rerun пропустил те же 50 по stable `externalId`
+- sync вставил 50 orders и 81 line item; immediate rerun обновил те же строки без дублей
+- alert run нашёл ровно 6 qualifying orders выше `50_000` и отправил 6 Telegram messages
+- immediate alert rerun пропустил те же 6 orders как уже отправленные
+- boundary order ровно на `50_000` не попал под условие, что соответствует strict `>` rule
+- публичный dashboard показывал 50 orders и реальный Supabase-backed daily revenue chart
 
-Latest release-closure pass on April 11, 2026:
+Последний release-closure pass от April 11, 2026:
 
 - `npm run typecheck`
 - `npm run build`
 - `npm audit --audit-level=low`
-- `npm run import:mock-orders` and immediate rerun both returned `skipped_existing=50`
-- `npm run sync:retailcrm-to-supabase` and immediate rerun both returned `updated_orders=50` and `updated_items=81` without duplicate inserts
-- `npm run alerts:telegram` and immediate rerun both returned `skipped_sent=6`, which confirms duplicate-safe behavior against the already-sent live state
-- fresh `vercel --prod` produced a ready deployment and refreshed `https://gbc-test-rho.vercel.app`
-- deployed `/api/health` returned `{"ok":true,"app":"GBEMPIRE Test Project"}`
+- `npm run import:mock-orders` и immediate rerun оба вернули `skipped_existing=50`
+- `npm run sync:retailcrm-to-supabase` и immediate rerun оба вернули `updated_orders=50` и `updated_items=81` без duplicate inserts
+- `npm run alerts:telegram` и immediate rerun оба вернули `skipped_sent=6`, что подтверждает duplicate-safe поведение на уже отправленном live state
+- свежий `vercel --prod` обновил [https://gbc-test-rho.vercel.app](https://gbc-test-rho.vercel.app)
+- deployed `/api/health` вернул `{"ok":true,"app":"GBEMPIRE Test Project"}`
 
-## Known Limits / Tradeoffs
+Дополнительный language-check pass:
 
-- [docs/technical-spec.md](./docs/technical-spec.md) is the architecture frame through Milestone 6, not the final deploy-state source of truth. Final review state lives in this README plus [QA.md](./QA.md).
-- Sync deliberately uses stable-id full reconciliation rather than an undocumented RetailCRM delta filter. This is less efficient, but more reviewable and safer for the test scope.
-- Telegram delivery uncertainty is handled conservatively: `delivery_unknown` blocks automatic retries to avoid duplicate messages.
-- The alert brief phrase "when an order appears in RetailCRM" is implemented as: after import and sync, the server-side alert runner scans Supabase and sends one message the first time it sees an order above `50_000`.
-- Sync reruns are duplicate-safe, but not a no-op: the second pass re-updates the same 50 orders and 81 line items through the merge-based reconciliation path.
-- The public dashboard is intentionally a narrow internal operations slice, not a generalized analytics product.
+- Telegram alert copy переведён на русский
+- для проверки были вручную переведены 3 existing `sent` rows в `failed`
+- штатный `npm run alerts:telegram` затем повторно отправил 3 сообщения
+- новые `telegramMessageId`: `11`, `12`, `13`
 
-## Implementation Notes
+## Ограничения И Компромиссы
+
+- [docs/technical-spec.md](./docs/technical-spec.md) — это архитектурная рамка через Milestone 6, а не финальный source of truth по deployed state. Финальное состояние проекта описано в этом README и [QA.md](./QA.md).
+- Sync специально использует stable-id full reconciliation, а не undocumented RetailCRM delta filter. Это менее эффективно, но проще проверяется и безопаснее для scope тестового.
+- При сомнении в результате Telegram delivery проект предпочитает duplicate-safety: `delivery_unknown` блокирует automatic retries.
+- Формулировка из брифа “when an order appears in RetailCRM” реализована так: после import и sync серверный alert runner читает Supabase и отправляет одно сообщение при первом обнаружении заказа выше `50_000`.
+- Sync reruns duplicate-safe, но не no-op: второй прогон всё равно переобновляет те же 50 orders и 81 line items.
+- Публичный dashboard специально остаётся узким internal ops view, а не generalized analytics product.
+
+## Технические Заметки
 
 Import:
 
-- stable `externalId` format is `mock-retailcrm:<sourceOrderId>`
-- create races converge to `skipped_existing` by re-querying RetailCRM
+- stable `externalId` формат: `mock-retailcrm:<sourceOrderId>`
+- create races сходятся в `skipped_existing` через повторный поиск в RetailCRM
 
 Sync:
 
-- only expected fixture-backed orders are reconciled
-- `order_items.external_item_id` is treated as the stable write key
-- incomplete RetailCRM item payloads fail closed instead of deleting items implicitly
+- reconciled only expected fixture-backed orders
+- `order_items.external_item_id` используется как stable write key
+- incomplete RetailCRM item payloads fail closed и не приводят к неявному удалению items
 
 Alerts:
 
-- qualifying orders are read from Supabase, not directly from RetailCRM
-- the threshold is strict `> 50_000`, not `>= 50_000`
-- `notification_log.notification_key` enforces one-send-per-order semantics
-- alert messages minimize PII and include the operator next step
+- qualifying orders читаются из Supabase, а не напрямую из RetailCRM
+- threshold строго `> 50_000`, а не `>= 50_000`
+- `notification_log.notification_key` обеспечивает one-send-per-order semantics
+- текст alert-сообщений минимизирует PII и теперь локализован на русский
 
-## Submission Checklist
+## Чеклист Перед Сдачей
 
-Use [SUBMISSION_CHECKLIST.md](./SUBMISSION_CHECKLIST.md) as the final go/no-go checklist.
+Использовать [SUBMISSION_CHECKLIST.md](./SUBMISSION_CHECKLIST.md) как финальный go/no-go checklist.
