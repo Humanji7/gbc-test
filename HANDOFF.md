@@ -2,33 +2,39 @@
 
 ## Task summary
 
-Final submission upgrade pass for the GBEMPIRE test project.
+Release-closure and production deploy pass for the GBEMPIRE test project.
 
 ## Current status
 
-- mock orders import into RetailCRM with stable ids
-- RetailCRM orders sync into Supabase with duplicate-safe reruns
-- high-value Telegram alerts are deduplicated through `notification_log`
-- public dashboard renders real Supabase data on `/`
-- public ops summary is available on `/api/ops-summary`
-- reviewer-facing docs were tightened to reduce friction and overstatement
+- 50-order fixture remains the committed source of truth
+- import reruns now confirm `skipped_existing=50`
+- sync reruns now confirm `updated_orders=50` and `updated_items=81` with no duplicate inserts
+- alert reruns now confirm the 6 qualifying orders stay duplicate-safe as `skipped_sent`
+- the polished dashboard UI is live in production
+- a fresh Vercel production deployment is ready and aliased to `https://gbc-test-rho.vercel.app`
+- `/api/health` returns `{"ok":true,"app":"GBEMPIRE Test Project"}`
 
 ## Validation status
 
 - `npm run typecheck`
 - `npm run build`
 - `npm audit --audit-level=low`
-- `npm run import:mock-orders -- --dry-run`
-- `curl -sS https://gbc-test-rho.vercel.app/api/health`
-- `curl -sS https://gbc-test-rho.vercel.app/api/ops-summary`
-- `curl -sS https://gbc-test-rho.vercel.app`
+- `npm run import:mock-orders`
+- immediate rerun of `npm run import:mock-orders`
+- `npm run sync:retailcrm-to-supabase`
+- immediate rerun of `npm run sync:retailcrm-to-supabase`
+- `npm run alerts:telegram`
+- immediate rerun of `npm run alerts:telegram`
+- `vercel --prod`
+- browser pass on `https://gbc-test-rho.vercel.app`
+- `curl https://gbc-test-rho.vercel.app/api/health`
 
 ## Open issues / risks
 
-- live sync mutation was intentionally not rerun in the final pass
-- live Telegram send mutation was intentionally not rerun in the final pass
-- public metrics remain dependent on the current Supabase dataset
+- sync reruns are still duplicate-safe but not no-op
+- this session validated duplicate-safe alert skipping, not fresh Telegram sends, because the qualifying orders were already marked `sent`
+- the project is intentionally small; the dashboard is an internal ops slice, not a generalized analytics surface
 
 ## Exact next prompt
 
-Review the final GBEMPIRE submission in /Users/admin/projects/gbc_test as an external reviewer: focus on acceptance risk, reviewer friction, product realism, AI-tool maturity, and trust, but do not change business logic unless you find a real blocker.
+Review the final GBEMPIRE submission in /Users/admin/projects/gbc_test like a skeptical external reviewer. Focus on reviewer trust, clarity, and whether any real blocker remains before handing it in, but do not change code unless you find a genuine release blocker.

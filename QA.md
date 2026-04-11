@@ -2,18 +2,22 @@
 
 ## Verdict
 
-The project is submission-ready. The current local state, reviewer-facing docs, and live public deploy tell the same story.
+The project is production-ready, redeployed, and reviewable as a submission. The local build, live integration reruns, and public deployment all tell the same story.
 
-What was checked in the final submission pass:
+What was checked in the release-closure pass on April 11, 2026:
 
 - local `npm run typecheck`
 - local `npm run build`
 - local `npm audit --audit-level=low`
-- local `npm run import:mock-orders -- --dry-run`
-- public `https://gbc-test-rho.vercel.app/api/health`
-- public `https://gbc-test-rho.vercel.app/api/ops-summary`
-- public `https://gbc-test-rho.vercel.app`
-- read-only Supabase sanity check for recent orders, missing `order_items.external_item_id`, and `notification_log` statuses
+- live `npm run import:mock-orders`
+- immediate rerun of `npm run import:mock-orders`
+- live `npm run sync:retailcrm-to-supabase`
+- immediate rerun of `npm run sync:retailcrm-to-supabase`
+- live `npm run alerts:telegram`
+- immediate rerun of `npm run alerts:telegram`
+- fresh `vercel --prod`
+- deployed `/api/health` check from `https://gbc-test-rho.vercel.app/api/health`
+- deployed `/` fetch and browser pass from `https://gbc-test-rho.vercel.app`
 
 ## Blockers
 
@@ -29,15 +33,13 @@ What was checked in the final submission pass:
 
 ## Missing validation
 
-- Live mutating sync was not rerun in the final submission pass.
-- Live Telegram delivery was not rerun in the final submission pass.
-- A fresh local browser-console pass was not completed in this environment.
+- none for the intended submission scope
 
 ## Residual risk
 
-- Dashboard numbers depend on the current connected Supabase project state and can change later.
-- The dashboard and ops summary are intentionally lightweight; they are not a full incident console or operator queue.
-- Telegram retry policy intentionally favors duplicate-safety over aggressive recovery when delivery state is uncertain.
+- Sync reruns are duplicate-safe, but they still rewrite the same 50 orders and 81 line items as updates on the second pass.
+- The current live alert state demonstrates duplicate-safe skipping, not fresh first-send behavior, because the 6 qualifying orders were already marked `sent` before this release-closure rerun.
+- The dashboard and ops summary remain intentionally narrow internal views, not a full incident console.
 
 ## Recommended next skill
 

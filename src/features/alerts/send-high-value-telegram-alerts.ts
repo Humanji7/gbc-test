@@ -127,8 +127,8 @@ function formatAlertMessage(order: QualifyingOrderRow, threshold: number): strin
     `Order: ${orderLabel}`,
     `External ID: ${order.external_id}`,
     `Amount: ${formatMoney(totalAmount, order.currency)}`,
-    `Threshold: >= ${threshold.toFixed(2)}`,
-    "Reason: Order total exceeds the configured high-value threshold.",
+    `Threshold: > ${threshold.toFixed(2)}`,
+    "Reason: Order total is above the configured high-value threshold.",
     `Status: ${order.status}`,
     `Customer: ${maskCustomerName(order.customer_first_name, order.customer_last_name)}`,
     `City: ${order.city ?? "n/a"}`,
@@ -142,7 +142,7 @@ async function listQualifyingOrders(threshold: number): Promise<QualifyingOrderR
     query: {
       select:
         "id,external_id,order_number,status,total_amount,currency,city,customer_first_name,customer_last_name,created_at_source,synced_at",
-      total_amount: `gte.${threshold}`,
+      total_amount: `gt.${threshold}`,
       order: "total_amount.desc"
     }
   });
@@ -291,6 +291,8 @@ function buildSkipRecord(
 export async function sendHighValueTelegramAlerts(
   threshold = HIGH_VALUE_ORDER_THRESHOLD
 ): Promise<SendHighValueTelegramAlertsResult> {
+  // Brief interpretation: after import and sync complete, the alert runner scans Supabase and
+  // sends exactly one Telegram message for each order whose synced total is strictly above the threshold.
   const qualifyingOrders = await listQualifyingOrders(threshold);
   const notificationsByKey = new Map(
     (await listNotificationLog()).map((row) => [row.notification_key, row])

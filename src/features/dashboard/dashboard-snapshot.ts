@@ -36,6 +36,13 @@ export type DashboardRecentOrder = Readonly<{
   orderMoment: string;
 }>;
 
+export type DashboardTrendPoint = Readonly<{
+  isoDate: string;
+  label: string;
+  orderCount: number;
+  totalAmount: number;
+}>;
+
 export type DashboardAttentionItem = Readonly<{
   severity: "ok" | "warning" | "critical";
   title: string;
@@ -81,6 +88,7 @@ export type DashboardSnapshot = Readonly<{
   averageOrderValue: number;
   highValueOrders: number;
   latestOrderMoment: string | null;
+  orderTrend: DashboardTrendPoint[];
   sourceBreakdown: DashboardBreakdownItem[];
   cityBreakdown: DashboardBreakdownItem[];
   recentOrders: DashboardRecentOrder[];
@@ -155,6 +163,48 @@ function resolveCurrency(orders: DashboardOrderRow[]): string {
   return orders.find((order) => order.currency?.trim())?.currency?.trim() ?? DEFAULT_CURRENCY;
 }
 
+function formatTrendLabel(isoDate: string): string {
+  return new Intl.DateTimeFormat("ru-RU", {
+    day: "numeric",
+    month: "short",
+    timeZone: "UTC"
+  }).format(new Date(`${isoDate}T00:00:00Z`));
+}
+
+function buildOrderTrend(orders: DashboardOrderRow[]): DashboardTrendPoint[] {
+  const buckets = new Map<
+    string,
+    {
+      isoDate: string;
+      orderCount: number;
+      totalAmount: number;
+    }
+  >();
+
+  for (const order of orders) {
+    const trendMoment = order.created_at_source ?? getOrderMoment(order);
+    const isoDate = trendMoment.slice(0, 10);
+    const currentBucket = buckets.get(isoDate) ?? {
+      isoDate,
+      orderCount: 0,
+      totalAmount: 0
+    };
+
+    currentBucket.orderCount += 1;
+    currentBucket.totalAmount += toAmount(order.total_amount);
+    buckets.set(isoDate, currentBucket);
+  }
+
+  return [...buckets.values()]
+    .sort((left, right) => left.isoDate.localeCompare(right.isoDate))
+    .map((bucket) => ({
+      isoDate: bucket.isoDate,
+      label: formatTrendLabel(bucket.isoDate),
+      orderCount: bucket.orderCount,
+      totalAmount: Number(bucket.totalAmount.toFixed(2))
+    }));
+}
+
 export function buildDashboardSnapshot(orders: DashboardOrderRow[]): DashboardSnapshot {
   const totalOrders = orders.length;
   const totalRevenue = Number(
@@ -163,7 +213,7 @@ export function buildDashboardSnapshot(orders: DashboardOrderRow[]): DashboardSn
   const averageOrderValue =
     totalOrders > 0 ? Number((totalRevenue / totalOrders).toFixed(2)) : 0;
   const highValueOrders = orders.filter(
-    (order) => toAmount(order.total_amount) >= HIGH_VALUE_ORDER_THRESHOLD
+    (order) => toAmount(order.total_amount) > HIGH_VALUE_ORDER_THRESHOLD
   ).length;
   const latestOrderMoment = orders[0] ? getOrderMoment(orders[0]) : null;
   const currency = resolveCurrency(orders);
@@ -176,6 +226,7 @@ export function buildDashboardSnapshot(orders: DashboardOrderRow[]): DashboardSn
     averageOrderValue,
     highValueOrders,
     latestOrderMoment,
+    orderTrend: buildOrderTrend(orders),
     sourceBreakdown: buildBreakdown(orders, (order) =>
       normalizeBucketLabel(order.utm_source, UNKNOWN_SOURCE_LABEL)
     ),

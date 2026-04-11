@@ -1,5 +1,6 @@
 import "../../lib/server-only-guard.ts";
 import { readFile } from "node:fs/promises";
+import path from "node:path";
 
 export type MockOrderSource = {
   sourceOrderId: string;
@@ -56,6 +57,16 @@ export async function loadValidatedMockOrders(sourceFilePath: string): Promise<M
   validateMockOrders(orders);
 
   return orders;
+}
+
+export function resolveRepositoryMockOrdersPath(): string {
+  return path.join(process.cwd(), "scripts", "mock_orders.json");
+}
+
+export async function loadRepositoryMockOrderExternalIds(): Promise<string[]> {
+  const orders = await loadValidatedMockOrders(resolveRepositoryMockOrdersPath());
+
+  return orders.map((order) => buildMockRetailCrmOrderExternalId(order.sourceOrderId));
 }
 
 export function validateMockOrders(orders: MockOrderSource[]): void {

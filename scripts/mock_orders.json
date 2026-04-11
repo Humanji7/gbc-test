@@ -1,86 +1,1376 @@
 [
   {
-    "sourceOrderId": "10001",
-    "createdAt": "2026-04-08 10:15:00",
+    "sourceOrderId": "20001",
+    "createdAt": "2026-04-01 09:00:00",
     "countryIso": "US",
     "utmSource": "instagram",
     "customer": {
       "firstName": "Ava",
       "lastName": "Stone",
-      "phone": "+12025550101",
+      "phone": "+12025551000",
       "email": "ava.stone@example.test",
       "city": "Brooklyn"
     },
-    "deliveryAddress": "145 Atlantic Ave, Brooklyn, NY",
-    "customerComment": "Mock import order for Milestone 3 validation.",
+    "deliveryAddress": "140 Brooklyn Ave, Brooklyn",
     "items": [
       {
-        "sourceItemId": "10001-1",
+        "sourceItemId": "20001-1",
         "productName": "Signature Hoodie",
-        "sku": "SIG-HOODIE-BLK-M",
+        "sku": "SIG-HOODIE-01",
         "quantity": 1,
-        "unitPrice": 129.99
+        "unitPrice": 2900
       },
       {
-        "sourceItemId": "10001-2",
+        "sourceItemId": "20001-2",
+        "productName": "Cap",
+        "sku": "CAP-CORE-01",
+        "quantity": 1,
+        "unitPrice": 650
+      },
+      {
+        "sourceItemId": "20001-3",
         "productName": "Sticker Pack",
-        "sku": "STICKER-PACK-01",
+        "sku": "STICKER-01",
         "quantity": 2,
-        "unitPrice": 4.5
+        "unitPrice": 190
       }
     ]
   },
   {
-    "sourceOrderId": "10002",
-    "createdAt": "2026-04-08 12:40:00",
+    "sourceOrderId": "20002",
+    "createdAt": "2026-04-02 10:07:00",
     "countryIso": "US",
     "utmSource": "google",
     "customer": {
       "firstName": "Maya",
       "lastName": "Foster",
-      "phone": "+12025550102",
+      "phone": "+12025551001",
       "email": "maya.foster@example.test",
       "city": "Austin"
     },
-    "deliveryAddress": "2401 E 6th St, Austin, TX",
+    "deliveryAddress": "141 Austin Ave, Austin",
     "items": [
       {
-        "sourceItemId": "10002-1",
+        "sourceItemId": "20002-1",
         "productName": "Oversized Tee",
-        "sku": "TEE-OVR-WHT-L",
+        "sku": "TEE-OVR-02",
         "quantity": 2,
-        "unitPrice": 38
+        "unitPrice": 3190
       }
     ]
   },
   {
-    "sourceOrderId": "10003",
-    "createdAt": "2026-04-09 09:05:00",
+    "sourceOrderId": "20003",
+    "createdAt": "2026-04-03 11:14:00",
     "countryIso": "US",
     "utmSource": "newsletter",
     "customer": {
       "firstName": "Noah",
       "lastName": "Cole",
-      "phone": "+12025550103",
+      "phone": "+12025551002",
       "email": "noah.cole@example.test",
       "city": "Chicago"
     },
-    "deliveryAddress": "1130 W Monroe St, Chicago, IL",
+    "deliveryAddress": "142 Chicago Ave, Chicago",
     "items": [
       {
-        "sourceItemId": "10003-1",
+        "sourceItemId": "20003-1",
+        "productName": "Canvas Tote",
+        "sku": "TOTE-CANVAS-03",
+        "quantity": 1,
+        "unitPrice": 3480
+      },
+      {
+        "sourceItemId": "20003-2",
+        "productName": "Starter Pack",
+        "sku": "STARTER-03",
+        "quantity": 1,
+        "unitPrice": 1100
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20004",
+    "createdAt": "2026-04-04 12:21:00",
+    "countryIso": "US",
+    "utmSource": "tiktok",
+    "customer": {
+      "firstName": "Liam",
+      "lastName": "Bennett",
+      "phone": "+12025551003",
+      "email": "liam.bennett@example.test",
+      "city": "Seattle"
+    },
+    "deliveryAddress": "143 Seattle Ave, Seattle",
+    "items": [
+      {
+        "sourceItemId": "20004-1",
+        "productName": "Cap",
+        "sku": "CAP-CORE-04",
+        "quantity": 2,
+        "unitPrice": 3770
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20005",
+    "createdAt": "2026-04-05 13:28:00",
+    "countryIso": "US",
+    "utmSource": "affiliate",
+    "customer": {
+      "firstName": "Emma",
+      "lastName": "Hart",
+      "phone": "+12025551004",
+      "email": "emma.hart@example.test",
+      "city": "Denver"
+    },
+    "deliveryAddress": "144 Denver Ave, Denver",
+    "items": [
+      {
+        "sourceItemId": "20005-1",
+        "productName": "Crewneck",
+        "sku": "CREW-CORE-05",
+        "quantity": 1,
+        "unitPrice": 4060
+      },
+      {
+        "sourceItemId": "20005-2",
+        "productName": "Windbreaker",
+        "sku": "WIND-BRKR-05",
+        "quantity": 1,
+        "unitPrice": 1550
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20006",
+    "createdAt": "2026-04-06 14:35:00",
+    "countryIso": "US",
+    "utmSource": "direct",
+    "customer": {
+      "firstName": "Sofia",
+      "lastName": "Morris",
+      "phone": "+12025551005",
+      "email": "sofia.morris@example.test",
+      "city": "Miami"
+    },
+    "deliveryAddress": "145 Miami Ave, Miami",
+    "items": [
+      {
+        "sourceItemId": "20006-1",
+        "productName": "Starter Pack",
+        "sku": "STARTER-01",
+        "quantity": 2,
+        "unitPrice": 4350
+      },
+      {
+        "sourceItemId": "20006-3",
+        "productName": "Sticker Pack",
+        "sku": "STICKER-02",
+        "quantity": 2,
+        "unitPrice": 190
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20007",
+    "createdAt": "2026-04-07 15:42:00",
+    "countryIso": "US",
+    "utmSource": "marketplace",
+    "customer": {
+      "firstName": "Ethan",
+      "lastName": "Parker",
+      "phone": "+12025551006",
+      "email": "ethan.parker@example.test",
+      "city": "Atlanta"
+    },
+    "deliveryAddress": "146 Atlanta Ave, Atlanta",
+    "items": [
+      {
+        "sourceItemId": "20007-1",
+        "productName": "Track Pants",
+        "sku": "TRACK-PNT-02",
+        "quantity": 1,
+        "unitPrice": 4640
+      },
+      {
+        "sourceItemId": "20007-2",
+        "productName": "Oversized Tee",
+        "sku": "TEE-OVR-07",
+        "quantity": 1,
+        "unitPrice": 875
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20008",
+    "createdAt": "2026-04-08 16:49:00",
+    "countryIso": "US",
+    "utmSource": "youtube",
+    "customer": {
+      "firstName": "Olivia",
+      "lastName": "Hayes",
+      "phone": "+12025551007",
+      "email": "olivia.hayes@example.test",
+      "city": "Boston"
+    },
+    "deliveryAddress": "147 Boston Ave, Boston",
+    "items": [
+      {
+        "sourceItemId": "20008-1",
+        "productName": "Collector Leather Jacket",
+        "sku": "PREM-JACKET-01",
+        "quantity": 1,
+        "unitPrice": 51200
+      }
+    ],
+    "customerComment": "Premium mock order above the Telegram threshold."
+  },
+  {
+    "sourceOrderId": "20009",
+    "createdAt": "2026-04-09 09:56:00",
+    "countryIso": "US",
+    "utmSource": "instagram",
+    "customer": {
+      "firstName": "Lucas",
+      "lastName": "Turner",
+      "phone": "+12025551008",
+      "email": "lucas.turner@example.test",
+      "city": "Phoenix"
+    },
+    "deliveryAddress": "148 Phoenix Ave, Phoenix",
+    "items": [
+      {
+        "sourceItemId": "20009-1",
+        "productName": "Signature Hoodie",
+        "sku": "SIG-HOODIE-04",
+        "quantity": 1,
+        "unitPrice": 5220
+      },
+      {
+        "sourceItemId": "20009-2",
+        "productName": "Cap",
+        "sku": "CAP-CORE-02",
+        "quantity": 1,
+        "unitPrice": 1325
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20010",
+    "createdAt": "2026-04-10 10:03:00",
+    "countryIso": "US",
+    "utmSource": "google",
+    "customer": {
+      "firstName": "Chloe",
+      "lastName": "Reed",
+      "phone": "+12025551009",
+      "email": "chloe.reed@example.test",
+      "city": "Portland"
+    },
+    "deliveryAddress": "149 Portland Ave, Portland",
+    "items": [
+      {
+        "sourceItemId": "20010-1",
+        "productName": "Oversized Tee",
+        "sku": "TEE-OVR-05",
+        "quantity": 2,
+        "unitPrice": 5510
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20011",
+    "createdAt": "2026-04-01 11:10:00",
+    "countryIso": "US",
+    "utmSource": "newsletter",
+    "customer": {
+      "firstName": "Mason",
+      "lastName": "Walker",
+      "phone": "+12025551010",
+      "email": "mason.walker@example.test",
+      "city": "Brooklyn"
+    },
+    "deliveryAddress": "150 Brooklyn Ave, Brooklyn",
+    "items": [
+      {
+        "sourceItemId": "20011-1",
         "productName": "Canvas Tote",
         "sku": "TOTE-CANVAS-01",
         "quantity": 1,
-        "unitPrice": 24.99
+        "unitPrice": 5800
       },
       {
-        "sourceItemId": "10003-2",
-        "productName": "Cap",
-        "sku": "CAP-NAVY-01",
+        "sourceItemId": "20011-2",
+        "productName": "Starter Pack",
+        "sku": "STARTER-04",
         "quantity": 1,
-        "unitPrice": 22.5
+        "unitPrice": 650
+      },
+      {
+        "sourceItemId": "20011-3",
+        "productName": "Sticker Pack",
+        "sku": "STICKER-03",
+        "quantity": 2,
+        "unitPrice": 190
       }
     ]
+  },
+  {
+    "sourceOrderId": "20012",
+    "createdAt": "2026-04-02 12:17:00",
+    "countryIso": "US",
+    "utmSource": "tiktok",
+    "customer": {
+      "firstName": "Grace",
+      "lastName": "Brooks",
+      "phone": "+12025551011",
+      "email": "grace.brooks@example.test",
+      "city": "Austin"
+    },
+    "deliveryAddress": "151 Austin Ave, Austin",
+    "items": [
+      {
+        "sourceItemId": "20012-1",
+        "productName": "Cap",
+        "sku": "CAP-CORE-02",
+        "quantity": 2,
+        "unitPrice": 6090
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20013",
+    "createdAt": "2026-04-03 13:24:00",
+    "countryIso": "US",
+    "utmSource": "affiliate",
+    "customer": {
+      "firstName": "James",
+      "lastName": "Price",
+      "phone": "+12025551012",
+      "email": "james.price@example.test",
+      "city": "Chicago"
+    },
+    "deliveryAddress": "152 Chicago Ave, Chicago",
+    "items": [
+      {
+        "sourceItemId": "20013-1",
+        "productName": "Crewneck",
+        "sku": "CREW-CORE-03",
+        "quantity": 1,
+        "unitPrice": 6380
+      },
+      {
+        "sourceItemId": "20013-2",
+        "productName": "Windbreaker",
+        "sku": "WIND-BRKR-06",
+        "quantity": 1,
+        "unitPrice": 1100
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20014",
+    "createdAt": "2026-04-04 14:31:00",
+    "countryIso": "US",
+    "utmSource": "direct",
+    "customer": {
+      "firstName": "Zoe",
+      "lastName": "Perry",
+      "phone": "+12025551013",
+      "email": "zoe.perry@example.test",
+      "city": "Seattle"
+    },
+    "deliveryAddress": "153 Seattle Ave, Seattle",
+    "items": [
+      {
+        "sourceItemId": "20014-1",
+        "productName": "Starter Pack",
+        "sku": "STARTER-04",
+        "quantity": 2,
+        "unitPrice": 6670
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20015",
+    "createdAt": "2026-04-05 15:38:00",
+    "countryIso": "US",
+    "utmSource": "marketplace",
+    "customer": {
+      "firstName": "Elijah",
+      "lastName": "Ward",
+      "phone": "+12025551014",
+      "email": "elijah.ward@example.test",
+      "city": "Denver"
+    },
+    "deliveryAddress": "154 Denver Ave, Denver",
+    "items": [
+      {
+        "sourceItemId": "20015-1",
+        "productName": "Track Pants",
+        "sku": "TRACK-PNT-05",
+        "quantity": 1,
+        "unitPrice": 6960
+      },
+      {
+        "sourceItemId": "20015-2",
+        "productName": "Oversized Tee",
+        "sku": "TEE-OVR-01",
+        "quantity": 1,
+        "unitPrice": 1550
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20016",
+    "createdAt": "2026-04-06 16:45:00",
+    "countryIso": "US",
+    "utmSource": "youtube",
+    "customer": {
+      "firstName": "Nora",
+      "lastName": "Bell",
+      "phone": "+12025551015",
+      "email": "nora.bell@example.test",
+      "city": "Miami"
+    },
+    "deliveryAddress": "155 Miami Ave, Miami",
+    "items": [
+      {
+        "sourceItemId": "20016-1",
+        "productName": "Windbreaker",
+        "sku": "WIND-BRKR-01",
+        "quantity": 2,
+        "unitPrice": 7250
+      },
+      {
+        "sourceItemId": "20016-3",
+        "productName": "Sticker Pack",
+        "sku": "STICKER-04",
+        "quantity": 2,
+        "unitPrice": 190
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20017",
+    "createdAt": "2026-04-07 09:52:00",
+    "countryIso": "US",
+    "utmSource": "instagram",
+    "customer": {
+      "firstName": "Logan",
+      "lastName": "Gray",
+      "phone": "+12025551016",
+      "email": "logan.gray@example.test",
+      "city": "Atlanta"
+    },
+    "deliveryAddress": "156 Atlanta Ave, Atlanta",
+    "items": [
+      {
+        "sourceItemId": "20017-1",
+        "productName": "Styling Rack Bundle",
+        "sku": "BUNDLE-RACK-02",
+        "quantity": 1,
+        "unitPrice": 68350
+      }
+    ],
+    "customerComment": "Premium mock order above the Telegram threshold."
+  },
+  {
+    "sourceOrderId": "20018",
+    "createdAt": "2026-04-08 10:59:00",
+    "countryIso": "US",
+    "utmSource": "google",
+    "customer": {
+      "firstName": "Ella",
+      "lastName": "Cooper",
+      "phone": "+12025551017",
+      "email": "ella.cooper@example.test",
+      "city": "Boston"
+    },
+    "deliveryAddress": "157 Boston Ave, Boston",
+    "items": [
+      {
+        "sourceItemId": "20018-1",
+        "productName": "Oversized Tee",
+        "sku": "TEE-OVR-03",
+        "quantity": 2,
+        "unitPrice": 7830
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20019",
+    "createdAt": "2026-04-09 11:06:00",
+    "countryIso": "US",
+    "utmSource": "newsletter",
+    "customer": {
+      "firstName": "Henry",
+      "lastName": "Diaz",
+      "phone": "+12025551018",
+      "email": "henry.diaz@example.test",
+      "city": "Phoenix"
+    },
+    "deliveryAddress": "158 Phoenix Ave, Phoenix",
+    "items": [
+      {
+        "sourceItemId": "20019-1",
+        "productName": "Canvas Tote",
+        "sku": "TOTE-CANVAS-04",
+        "quantity": 1,
+        "unitPrice": 8120
+      },
+      {
+        "sourceItemId": "20019-2",
+        "productName": "Starter Pack",
+        "sku": "STARTER-05",
+        "quantity": 1,
+        "unitPrice": 1325
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20020",
+    "createdAt": "2026-04-10 12:13:00",
+    "countryIso": "US",
+    "utmSource": "tiktok",
+    "customer": {
+      "firstName": "Lily",
+      "lastName": "Kelly",
+      "phone": "+12025551019",
+      "email": "lily.kelly@example.test",
+      "city": "Portland"
+    },
+    "deliveryAddress": "159 Portland Ave, Portland",
+    "items": [
+      {
+        "sourceItemId": "20020-1",
+        "productName": "Cap",
+        "sku": "CAP-CORE-05",
+        "quantity": 2,
+        "unitPrice": 8410
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20021",
+    "createdAt": "2026-04-01 13:20:00",
+    "countryIso": "US",
+    "utmSource": "affiliate",
+    "customer": {
+      "firstName": "Leo",
+      "lastName": "Long",
+      "phone": "+12025551020",
+      "email": "leo.long@example.test",
+      "city": "Brooklyn"
+    },
+    "deliveryAddress": "160 Brooklyn Ave, Brooklyn",
+    "items": [
+      {
+        "sourceItemId": "20021-1",
+        "productName": "Crewneck",
+        "sku": "CREW-CORE-01",
+        "quantity": 1,
+        "unitPrice": 8700
+      },
+      {
+        "sourceItemId": "20021-2",
+        "productName": "Windbreaker",
+        "sku": "WIND-BRKR-07",
+        "quantity": 1,
+        "unitPrice": 650
+      },
+      {
+        "sourceItemId": "20021-3",
+        "productName": "Sticker Pack",
+        "sku": "STICKER-01",
+        "quantity": 2,
+        "unitPrice": 190
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20022",
+    "createdAt": "2026-04-02 14:27:00",
+    "countryIso": "US",
+    "utmSource": "direct",
+    "customer": {
+      "firstName": "Aria",
+      "lastName": "Ross",
+      "phone": "+12025551021",
+      "email": "aria.ross@example.test",
+      "city": "Austin"
+    },
+    "deliveryAddress": "161 Austin Ave, Austin",
+    "items": [
+      {
+        "sourceItemId": "20022-1",
+        "productName": "Starter Pack",
+        "sku": "STARTER-02",
+        "quantity": 2,
+        "unitPrice": 8990
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20023",
+    "createdAt": "2026-04-03 15:34:00",
+    "countryIso": "US",
+    "utmSource": "marketplace",
+    "customer": {
+      "firstName": "Jack",
+      "lastName": "Wood",
+      "phone": "+12025551022",
+      "email": "jack.wood@example.test",
+      "city": "Chicago"
+    },
+    "deliveryAddress": "162 Chicago Ave, Chicago",
+    "items": [
+      {
+        "sourceItemId": "20023-1",
+        "productName": "Studio Lighting Set",
+        "sku": "BOUNDARY-SET-01",
+        "quantity": 2,
+        "unitPrice": 25000
+      }
+    ],
+    "customerComment": "Boundary mock order at exactly 50000 for strict-threshold validation."
+  },
+  {
+    "sourceOrderId": "20024",
+    "createdAt": "2026-04-04 16:41:00",
+    "countryIso": "US",
+    "utmSource": "youtube",
+    "customer": {
+      "firstName": "Mila",
+      "lastName": "Bailey",
+      "phone": "+12025551023",
+      "email": "mila.bailey@example.test",
+      "city": "Seattle"
+    },
+    "deliveryAddress": "163 Seattle Ave, Seattle",
+    "items": [
+      {
+        "sourceItemId": "20024-1",
+        "productName": "Windbreaker",
+        "sku": "WIND-BRKR-04",
+        "quantity": 2,
+        "unitPrice": 9570
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20025",
+    "createdAt": "2026-04-05 09:48:00",
+    "countryIso": "US",
+    "utmSource": "instagram",
+    "customer": {
+      "firstName": "Owen",
+      "lastName": "Myers",
+      "phone": "+12025551024",
+      "email": "owen.myers@example.test",
+      "city": "Denver"
+    },
+    "deliveryAddress": "164 Denver Ave, Denver",
+    "items": [
+      {
+        "sourceItemId": "20025-1",
+        "productName": "Signature Hoodie",
+        "sku": "SIG-HOODIE-05",
+        "quantity": 1,
+        "unitPrice": 9860
+      },
+      {
+        "sourceItemId": "20025-2",
+        "productName": "Cap",
+        "sku": "CAP-CORE-04",
+        "quantity": 1,
+        "unitPrice": 1550
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20026",
+    "createdAt": "2026-04-06 10:55:00",
+    "countryIso": "US",
+    "utmSource": "google",
+    "customer": {
+      "firstName": "Ruby",
+      "lastName": "Powell",
+      "phone": "+12025551025",
+      "email": "ruby.powell@example.test",
+      "city": "Miami"
+    },
+    "deliveryAddress": "165 Miami Ave, Miami",
+    "items": [
+      {
+        "sourceItemId": "20026-1",
+        "productName": "Oversized Tee",
+        "sku": "TEE-OVR-01",
+        "quantity": 2,
+        "unitPrice": 10150
+      },
+      {
+        "sourceItemId": "20026-3",
+        "productName": "Sticker Pack",
+        "sku": "STICKER-02",
+        "quantity": 2,
+        "unitPrice": 190
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20027",
+    "createdAt": "2026-04-07 11:02:00",
+    "countryIso": "US",
+    "utmSource": "newsletter",
+    "customer": {
+      "firstName": "Levi",
+      "lastName": "Barnes",
+      "phone": "+12025551026",
+      "email": "levi.barnes@example.test",
+      "city": "Atlanta"
+    },
+    "deliveryAddress": "166 Atlanta Ave, Atlanta",
+    "items": [
+      {
+        "sourceItemId": "20027-1",
+        "productName": "Canvas Tote",
+        "sku": "TOTE-CANVAS-02",
+        "quantity": 1,
+        "unitPrice": 10440
+      },
+      {
+        "sourceItemId": "20027-2",
+        "productName": "Starter Pack",
+        "sku": "STARTER-06",
+        "quantity": 1,
+        "unitPrice": 875
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20028",
+    "createdAt": "2026-04-08 12:09:00",
+    "countryIso": "US",
+    "utmSource": "tiktok",
+    "customer": {
+      "firstName": "Ivy",
+      "lastName": "Flores",
+      "phone": "+12025551027",
+      "email": "ivy.flores@example.test",
+      "city": "Boston"
+    },
+    "deliveryAddress": "167 Boston Ave, Boston",
+    "items": [
+      {
+        "sourceItemId": "20028-1",
+        "productName": "Cap",
+        "sku": "CAP-CORE-03",
+        "quantity": 2,
+        "unitPrice": 10730
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20029",
+    "createdAt": "2026-04-09 13:16:00",
+    "countryIso": "US",
+    "utmSource": "affiliate",
+    "customer": {
+      "firstName": "Wyatt",
+      "lastName": "Hughes",
+      "phone": "+12025551028",
+      "email": "wyatt.hughes@example.test",
+      "city": "Phoenix"
+    },
+    "deliveryAddress": "168 Phoenix Ave, Phoenix",
+    "items": [
+      {
+        "sourceItemId": "20029-1",
+        "productName": "Retail Launch Capsule",
+        "sku": "CAPSULE-03",
+        "quantity": 1,
+        "unitPrice": 75500
+      }
+    ],
+    "customerComment": "Premium mock order above the Telegram threshold."
+  },
+  {
+    "sourceOrderId": "20030",
+    "createdAt": "2026-04-10 14:23:00",
+    "countryIso": "US",
+    "utmSource": "direct",
+    "customer": {
+      "firstName": "Lucy",
+      "lastName": "West",
+      "phone": "+12025551029",
+      "email": "lucy.west@example.test",
+      "city": "Portland"
+    },
+    "deliveryAddress": "169 Portland Ave, Portland",
+    "items": [
+      {
+        "sourceItemId": "20030-1",
+        "productName": "Starter Pack",
+        "sku": "STARTER-05",
+        "quantity": 2,
+        "unitPrice": 11310
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20031",
+    "createdAt": "2026-04-01 15:30:00",
+    "countryIso": "US",
+    "utmSource": "marketplace",
+    "customer": {
+      "firstName": "Julian",
+      "lastName": "Coleman",
+      "phone": "+12025551030",
+      "email": "julian.coleman@example.test",
+      "city": "Brooklyn"
+    },
+    "deliveryAddress": "170 Brooklyn Ave, Brooklyn",
+    "items": [
+      {
+        "sourceItemId": "20031-1",
+        "productName": "Track Pants",
+        "sku": "TRACK-PNT-01",
+        "quantity": 1,
+        "unitPrice": 11600
+      },
+      {
+        "sourceItemId": "20031-2",
+        "productName": "Oversized Tee",
+        "sku": "TEE-OVR-03",
+        "quantity": 1,
+        "unitPrice": 650
+      },
+      {
+        "sourceItemId": "20031-3",
+        "productName": "Sticker Pack",
+        "sku": "STICKER-03",
+        "quantity": 2,
+        "unitPrice": 190
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20032",
+    "createdAt": "2026-04-02 16:37:00",
+    "countryIso": "US",
+    "utmSource": "youtube",
+    "customer": {
+      "firstName": "Eva",
+      "lastName": "Jenkins",
+      "phone": "+12025551031",
+      "email": "eva.jenkins@example.test",
+      "city": "Austin"
+    },
+    "deliveryAddress": "171 Austin Ave, Austin",
+    "items": [
+      {
+        "sourceItemId": "20032-1",
+        "productName": "Windbreaker",
+        "sku": "WIND-BRKR-02",
+        "quantity": 2,
+        "unitPrice": 11890
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20033",
+    "createdAt": "2026-04-03 09:44:00",
+    "countryIso": "US",
+    "utmSource": "instagram",
+    "customer": {
+      "firstName": "Isaac",
+      "lastName": "Patterson",
+      "phone": "+12025551032",
+      "email": "isaac.patterson@example.test",
+      "city": "Chicago"
+    },
+    "deliveryAddress": "172 Chicago Ave, Chicago",
+    "items": [
+      {
+        "sourceItemId": "20033-1",
+        "productName": "Signature Hoodie",
+        "sku": "SIG-HOODIE-03",
+        "quantity": 1,
+        "unitPrice": 12180
+      },
+      {
+        "sourceItemId": "20033-2",
+        "productName": "Cap",
+        "sku": "CAP-CORE-05",
+        "quantity": 1,
+        "unitPrice": 1100
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20034",
+    "createdAt": "2026-04-04 10:51:00",
+    "countryIso": "US",
+    "utmSource": "google",
+    "customer": {
+      "firstName": "Clara",
+      "lastName": "Bryant",
+      "phone": "+12025551033",
+      "email": "clara.bryant@example.test",
+      "city": "Seattle"
+    },
+    "deliveryAddress": "173 Seattle Ave, Seattle",
+    "items": [
+      {
+        "sourceItemId": "20034-1",
+        "productName": "Oversized Tee",
+        "sku": "TEE-OVR-04",
+        "quantity": 2,
+        "unitPrice": 12470
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20035",
+    "createdAt": "2026-04-05 11:58:00",
+    "countryIso": "US",
+    "utmSource": "newsletter",
+    "customer": {
+      "firstName": "Hudson",
+      "lastName": "Russell",
+      "phone": "+12025551034",
+      "email": "hudson.russell@example.test",
+      "city": "Denver"
+    },
+    "deliveryAddress": "174 Denver Ave, Denver",
+    "items": [
+      {
+        "sourceItemId": "20035-1",
+        "productName": "Canvas Tote",
+        "sku": "TOTE-CANVAS-05",
+        "quantity": 1,
+        "unitPrice": 12760
+      },
+      {
+        "sourceItemId": "20035-2",
+        "productName": "Starter Pack",
+        "sku": "STARTER-07",
+        "quantity": 1,
+        "unitPrice": 1550
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20036",
+    "createdAt": "2026-04-06 12:05:00",
+    "countryIso": "US",
+    "utmSource": "tiktok",
+    "customer": {
+      "firstName": "Alice",
+      "lastName": "Griffin",
+      "phone": "+12025551035",
+      "email": "alice.griffin@example.test",
+      "city": "Miami"
+    },
+    "deliveryAddress": "175 Miami Ave, Miami",
+    "items": [
+      {
+        "sourceItemId": "20036-1",
+        "productName": "Backstage Display Set",
+        "sku": "DISPLAY-04",
+        "quantity": 1,
+        "unitPrice": 90120
+      }
+    ],
+    "customerComment": "Premium mock order above the Telegram threshold."
+  },
+  {
+    "sourceOrderId": "20037",
+    "createdAt": "2026-04-07 13:12:00",
+    "countryIso": "US",
+    "utmSource": "affiliate",
+    "customer": {
+      "firstName": "Asher",
+      "lastName": "Simmons",
+      "phone": "+12025551036",
+      "email": "asher.simmons@example.test",
+      "city": "Atlanta"
+    },
+    "deliveryAddress": "176 Atlanta Ave, Atlanta",
+    "items": [
+      {
+        "sourceItemId": "20037-1",
+        "productName": "Crewneck",
+        "sku": "CREW-CORE-02",
+        "quantity": 1,
+        "unitPrice": 13340
+      },
+      {
+        "sourceItemId": "20037-2",
+        "productName": "Windbreaker",
+        "sku": "WIND-BRKR-02",
+        "quantity": 1,
+        "unitPrice": 875
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20038",
+    "createdAt": "2026-04-08 14:19:00",
+    "countryIso": "US",
+    "utmSource": "direct",
+    "customer": {
+      "firstName": "Layla",
+      "lastName": "Butler",
+      "phone": "+12025551037",
+      "email": "layla.butler@example.test",
+      "city": "Boston"
+    },
+    "deliveryAddress": "177 Boston Ave, Boston",
+    "items": [
+      {
+        "sourceItemId": "20038-1",
+        "productName": "Starter Pack",
+        "sku": "STARTER-03",
+        "quantity": 2,
+        "unitPrice": 13630
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20039",
+    "createdAt": "2026-04-09 15:26:00",
+    "countryIso": "US",
+    "utmSource": "marketplace",
+    "customer": {
+      "firstName": "Gabriel",
+      "lastName": "Henderson",
+      "phone": "+12025551038",
+      "email": "gabriel.henderson@example.test",
+      "city": "Phoenix"
+    },
+    "deliveryAddress": "178 Phoenix Ave, Phoenix",
+    "items": [
+      {
+        "sourceItemId": "20039-1",
+        "productName": "Track Pants",
+        "sku": "TRACK-PNT-04",
+        "quantity": 1,
+        "unitPrice": 13920
+      },
+      {
+        "sourceItemId": "20039-2",
+        "productName": "Oversized Tee",
+        "sku": "TEE-OVR-04",
+        "quantity": 1,
+        "unitPrice": 1325
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20040",
+    "createdAt": "2026-04-10 16:33:00",
+    "countryIso": "US",
+    "utmSource": "youtube",
+    "customer": {
+      "firstName": "Hazel",
+      "lastName": "Washington",
+      "phone": "+12025551039",
+      "email": "hazel.washington@example.test",
+      "city": "Portland"
+    },
+    "deliveryAddress": "179 Portland Ave, Portland",
+    "items": [
+      {
+        "sourceItemId": "20040-1",
+        "productName": "Windbreaker",
+        "sku": "WIND-BRKR-05",
+        "quantity": 2,
+        "unitPrice": 14210
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20041",
+    "createdAt": "2026-04-01 09:40:00",
+    "countryIso": "US",
+    "utmSource": "instagram",
+    "customer": {
+      "firstName": "Caleb",
+      "lastName": "Fisher",
+      "phone": "+12025551040",
+      "email": "caleb.fisher@example.test",
+      "city": "Brooklyn"
+    },
+    "deliveryAddress": "180 Brooklyn Ave, Brooklyn",
+    "items": [
+      {
+        "sourceItemId": "20041-1",
+        "productName": "Signature Hoodie",
+        "sku": "SIG-HOODIE-01",
+        "quantity": 1,
+        "unitPrice": 14500
+      },
+      {
+        "sourceItemId": "20041-2",
+        "productName": "Cap",
+        "sku": "CAP-CORE-06",
+        "quantity": 1,
+        "unitPrice": 650
+      },
+      {
+        "sourceItemId": "20041-3",
+        "productName": "Sticker Pack",
+        "sku": "STICKER-01",
+        "quantity": 2,
+        "unitPrice": 190
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20042",
+    "createdAt": "2026-04-02 10:47:00",
+    "countryIso": "US",
+    "utmSource": "google",
+    "customer": {
+      "firstName": "Stella",
+      "lastName": "Ellis",
+      "phone": "+12025551041",
+      "email": "stella.ellis@example.test",
+      "city": "Austin"
+    },
+    "deliveryAddress": "181 Austin Ave, Austin",
+    "items": [
+      {
+        "sourceItemId": "20042-1",
+        "productName": "Oversized Tee",
+        "sku": "TEE-OVR-02",
+        "quantity": 2,
+        "unitPrice": 14790
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20043",
+    "createdAt": "2026-04-03 11:54:00",
+    "countryIso": "US",
+    "utmSource": "newsletter",
+    "customer": {
+      "firstName": "Miles",
+      "lastName": "Graham",
+      "phone": "+12025551042",
+      "email": "miles.graham@example.test",
+      "city": "Chicago"
+    },
+    "deliveryAddress": "182 Chicago Ave, Chicago",
+    "items": [
+      {
+        "sourceItemId": "20043-1",
+        "productName": "Canvas Tote",
+        "sku": "TOTE-CANVAS-03",
+        "quantity": 1,
+        "unitPrice": 15080
+      },
+      {
+        "sourceItemId": "20043-2",
+        "productName": "Starter Pack",
+        "sku": "STARTER-01",
+        "quantity": 1,
+        "unitPrice": 1100
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20044",
+    "createdAt": "2026-04-04 12:01:00",
+    "countryIso": "US",
+    "utmSource": "tiktok",
+    "customer": {
+      "firstName": "Violet",
+      "lastName": "Porter",
+      "phone": "+12025551043",
+      "email": "violet.porter@example.test",
+      "city": "Seattle"
+    },
+    "deliveryAddress": "183 Seattle Ave, Seattle",
+    "items": [
+      {
+        "sourceItemId": "20044-1",
+        "productName": "Pop-up Event Kit",
+        "sku": "EVENT-KIT-05",
+        "quantity": 1,
+        "unitPrice": 120000
+      }
+    ],
+    "customerComment": "Premium mock order above the Telegram threshold."
+  },
+  {
+    "sourceOrderId": "20045",
+    "createdAt": "2026-04-05 13:08:00",
+    "countryIso": "US",
+    "utmSource": "affiliate",
+    "customer": {
+      "firstName": "Nathan",
+      "lastName": "Hunter",
+      "phone": "+12025551044",
+      "email": "nathan.hunter@example.test",
+      "city": "Denver"
+    },
+    "deliveryAddress": "184 Denver Ave, Denver",
+    "items": [
+      {
+        "sourceItemId": "20045-1",
+        "productName": "Crewneck",
+        "sku": "CREW-CORE-05",
+        "quantity": 1,
+        "unitPrice": 15660
+      },
+      {
+        "sourceItemId": "20045-2",
+        "productName": "Windbreaker",
+        "sku": "WIND-BRKR-03",
+        "quantity": 1,
+        "unitPrice": 1550
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20046",
+    "createdAt": "2026-04-06 14:15:00",
+    "countryIso": "US",
+    "utmSource": "direct",
+    "customer": {
+      "firstName": "Sadie",
+      "lastName": "Hicks",
+      "phone": "+12025551045",
+      "email": "sadie.hicks@example.test",
+      "city": "Miami"
+    },
+    "deliveryAddress": "185 Miami Ave, Miami",
+    "items": [
+      {
+        "sourceItemId": "20046-1",
+        "productName": "Starter Pack",
+        "sku": "STARTER-01",
+        "quantity": 2,
+        "unitPrice": 15950
+      },
+      {
+        "sourceItemId": "20046-3",
+        "productName": "Sticker Pack",
+        "sku": "STICKER-02",
+        "quantity": 2,
+        "unitPrice": 190
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20047",
+    "createdAt": "2026-04-07 15:22:00",
+    "countryIso": "US",
+    "utmSource": "marketplace",
+    "customer": {
+      "firstName": "Adrian",
+      "lastName": "Crawford",
+      "phone": "+12025551046",
+      "email": "adrian.crawford@example.test",
+      "city": "Atlanta"
+    },
+    "deliveryAddress": "186 Atlanta Ave, Atlanta",
+    "items": [
+      {
+        "sourceItemId": "20047-1",
+        "productName": "Track Pants",
+        "sku": "TRACK-PNT-02",
+        "quantity": 1,
+        "unitPrice": 16240
+      },
+      {
+        "sourceItemId": "20047-2",
+        "productName": "Oversized Tee",
+        "sku": "TEE-OVR-05",
+        "quantity": 1,
+        "unitPrice": 875
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20048",
+    "createdAt": "2026-04-08 16:29:00",
+    "countryIso": "US",
+    "utmSource": "youtube",
+    "customer": {
+      "firstName": "Naomi",
+      "lastName": "Henry",
+      "phone": "+12025551047",
+      "email": "naomi.henry@example.test",
+      "city": "Boston"
+    },
+    "deliveryAddress": "187 Boston Ave, Boston",
+    "items": [
+      {
+        "sourceItemId": "20048-1",
+        "productName": "Windbreaker",
+        "sku": "WIND-BRKR-03",
+        "quantity": 2,
+        "unitPrice": 16530
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20049",
+    "createdAt": "2026-04-09 09:36:00",
+    "countryIso": "US",
+    "utmSource": "instagram",
+    "customer": {
+      "firstName": "Roman",
+      "lastName": "Warren",
+      "phone": "+12025551048",
+      "email": "roman.warren@example.test",
+      "city": "Phoenix"
+    },
+    "deliveryAddress": "188 Phoenix Ave, Phoenix",
+    "items": [
+      {
+        "sourceItemId": "20049-1",
+        "productName": "Signature Hoodie",
+        "sku": "SIG-HOODIE-04",
+        "quantity": 1,
+        "unitPrice": 16820
+      },
+      {
+        "sourceItemId": "20049-2",
+        "productName": "Cap",
+        "sku": "CAP-CORE-07",
+        "quantity": 1,
+        "unitPrice": 1325
+      }
+    ]
+  },
+  {
+    "sourceOrderId": "20050",
+    "createdAt": "2026-04-10 10:43:00",
+    "countryIso": "US",
+    "utmSource": "google",
+    "customer": {
+      "firstName": "Elise",
+      "lastName": "Lane",
+      "phone": "+12025551049",
+      "email": "elise.lane@example.test",
+      "city": "Portland"
+    },
+    "deliveryAddress": "189 Portland Ave, Portland",
+    "items": [
+      {
+        "sourceItemId": "20050-1",
+        "productName": "Founder Archive Bundle",
+        "sku": "ARCHIVE-06",
+        "quantity": 1,
+        "unitPrice": 55555
+      }
+    ],
+    "customerComment": "Premium mock order above the Telegram threshold."
   }
 ]

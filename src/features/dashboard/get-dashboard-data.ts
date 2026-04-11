@@ -1,4 +1,5 @@
 import { supabaseAdminFetch } from "@/lib/supabase/server";
+import { loadRepositoryMockOrderExternalIds } from "@/features/orders/mock-order-contract";
 import {
   buildDashboardSnapshot,
   type DashboardAttentionItem,
@@ -305,10 +306,12 @@ async function buildOperationsSnapshot(currency: string): Promise<DashboardOpera
 }
 
 export async function getDashboardSnapshot(): Promise<DashboardSnapshot> {
+  const fixtureExternalIds = await loadRepositoryMockOrderExternalIds();
   const orders = await supabaseAdminFetch<DashboardOrderRow[]>("orders", {
     query: {
       select:
         "external_id,order_number,status,utm_source,city,total_amount,currency,created_at_source,updated_at_source,synced_at",
+      external_id: buildSupabaseInFilter(fixtureExternalIds),
       order: "updated_at_source.desc.nullslast,created_at_source.desc.nullslast"
     }
   });

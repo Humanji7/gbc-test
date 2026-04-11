@@ -121,13 +121,13 @@ These variables must never be imported into client code:
 
 ### Alert flow
 
-1. New or updated orders are evaluated against the current high-value threshold of `100`.
+1. New or updated orders are evaluated against the current high-value threshold of `> 50_000`.
 2. Notification records are claimed atomically before delivery so concurrent runs cannot retry the same alert at the same time.
 3. If Telegram may already have accepted a message but the final persistence step fails, the notification moves to a manual-review state instead of being retried blindly.
 
 ### Dashboard flow
 
-1. Server-rendered pages query Supabase for KPI and summary views.
+1. Server-rendered pages query Supabase for KPI, chart, and summary views.
 2. The browser only receives data already approved for display.
 
 ## Milestone Ownership
