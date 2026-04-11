@@ -36,6 +36,43 @@ export type DashboardRecentOrder = Readonly<{
   orderMoment: string;
 }>;
 
+export type DashboardAttentionItem = Readonly<{
+  severity: "ok" | "warning" | "critical";
+  title: string;
+  detail: string;
+  action: string;
+}>;
+
+export type DashboardNotificationCounts = Readonly<{
+  sending: number;
+  sent: number;
+  failed: number;
+  deliveryUnknown: number;
+}>;
+
+export type DashboardNotificationEvent = Readonly<{
+  orderExternalId: string;
+  orderNumber: string;
+  orderStatus: string;
+  totalAmount: number;
+  currency: string;
+  notificationStatus: "sending" | "sent" | "failed" | "delivery_unknown";
+  updatedAt: string;
+  reason: string | null;
+}>;
+
+export type DashboardOperationsSnapshot = Readonly<{
+  syncStatus: "healthy" | "warning" | "critical";
+  syncStatusLabel: string;
+  lastSuccessfulSyncAt: string | null;
+  lastSyncedAtSource: string | null;
+  activeCursor: string | null;
+  latestAlertActivity: string | null;
+  notificationCounts: DashboardNotificationCounts;
+  attentionItems: DashboardAttentionItem[];
+  recentNotificationEvents: DashboardNotificationEvent[];
+}>;
+
 export type DashboardSnapshot = Readonly<{
   generatedAt: string;
   currency: string;
@@ -47,6 +84,7 @@ export type DashboardSnapshot = Readonly<{
   sourceBreakdown: DashboardBreakdownItem[];
   cityBreakdown: DashboardBreakdownItem[];
   recentOrders: DashboardRecentOrder[];
+  operations: DashboardOperationsSnapshot;
 }>;
 
 type BreakdownBucket = {
@@ -153,6 +191,22 @@ export function buildDashboardSnapshot(orders: DashboardOrderRow[]): DashboardSn
       totalAmount: toAmount(order.total_amount),
       currency: order.currency?.trim() || currency,
       orderMoment: getOrderMoment(order)
-    }))
+    })),
+    operations: {
+      syncStatus: "warning",
+      syncStatusLabel: "Операционный статус не загружен",
+      lastSuccessfulSyncAt: null,
+      lastSyncedAtSource: null,
+      activeCursor: null,
+      latestAlertActivity: null,
+      notificationCounts: {
+        sending: 0,
+        sent: 0,
+        failed: 0,
+        deliveryUnknown: 0
+      },
+      attentionItems: [],
+      recentNotificationEvents: []
+    }
   };
 }

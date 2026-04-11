@@ -2,23 +2,18 @@
 
 ## Verdict
 
-The project is submission-ready, and the reviewed local state is now aligned with both the GitHub repo and the live public deploy.
+The project is submission-ready. The current local state, reviewer-facing docs, and live public deploy tell the same story.
 
-What I checked in this reviewer pass:
+What was checked in the final submission pass:
 
-- local `npm run typecheck` passed
-- local `npm run build` passed
-- local build warning about an inferred workspace root was removed by setting an explicit `turbopack.root` in `next.config.ts`
-- local `npm audit --audit-level=low` passed with `0` vulnerabilities
-- local `npm run import:mock-orders -- --dry-run` passed and confirmed all 3 stable ids resolve as existing
-- public `https://gbc-test-rho.vercel.app` responded successfully and rendered dashboard content
-- public `https://gbc-test-rho.vercel.app/api/health` responded with `{"ok":true,"app":"GBEMPIRE Test Project"}`
-- the public HTML showed real dashboard data: 3 orders, `262.48` total revenue, and 1 high-value order
-- a read-only Supabase sanity check saw 3 orders, `0` `order_items` rows missing `external_item_id`, and one `notification_log` row in `sent`
-- README, technical spec, handoff, checklist, and runtime labels were reviewed for consistency
-- the reviewer-facing consistency fixes were deployed to production, and the public milestone label was removed entirely from the dashboard and health payload
-
-The major reviewer-visible mismatch from the previous pass is now closed, and the public surface no longer exposes milestone labeling at all.
+- local `npm run typecheck`
+- local `npm run build`
+- local `npm audit --audit-level=low`
+- local `npm run import:mock-orders -- --dry-run`
+- public `https://gbc-test-rho.vercel.app/api/health`
+- public `https://gbc-test-rho.vercel.app/api/ops-summary`
+- public `https://gbc-test-rho.vercel.app`
+- read-only Supabase sanity check for recent orders, missing `order_items.external_item_id`, and `notification_log` statuses
 
 ## Blockers
 
@@ -34,15 +29,16 @@ The major reviewer-visible mismatch from the previous pass is now closed, and th
 
 ## Missing validation
 
-- Live mutating sync was not rerun in this pass.
-- Live Telegram delivery was not rerun in this pass.
-- A fresh browser-console pass through local `agent-browser` could not be completed because the required Playwright browser binary is missing in this environment. Public content was still checked through direct HTTP responses and rendered HTML.
+- Live mutating sync was not rerun in the final submission pass.
+- Live Telegram delivery was not rerun in the final submission pass.
+- A fresh local browser-console pass was not completed in this environment.
 
 ## Residual risk
 
-- The biggest remaining risk is no longer submission packaging drift. It is mainly that live mutating sync and live Telegram delivery were intentionally not rerun in this final pass.
-- Dashboard freshness still depends on the currently connected Supabase project state.
+- Dashboard numbers depend on the current connected Supabase project state and can change later.
+- The dashboard and ops summary are intentionally lightweight; they are not a full incident console or operator queue.
+- Telegram retry policy intentionally favors duplicate-safety over aggressive recovery when delivery state is uncertain.
 
 ## Recommended next skill
 
-- none required for submission in the current state
+- none required for submission

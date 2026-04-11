@@ -2,48 +2,33 @@
 
 ## Task summary
 
-The core project is complete through Milestone 7, including deploy and submission packaging, and the final docs/package consistency pass is now applied.
+Final submission upgrade pass for the GBEMPIRE test project.
 
 ## Current status
 
-- mock orders import into RetailCRM
-- RetailCRM orders sync into Supabase
-- duplicate-safe Telegram alerts run from Supabase data
-- the dashboard renders real data from Supabase on `/`
-- the schema now explicitly enables RLS on all project tables
-- the repo is pushed to GitHub at `https://github.com/Humanji7/gbc-test`
-- the app is deployed publicly at `https://gbc-test-rho.vercel.app`
-- the public app no longer exposes milestone labels in the dashboard or `/api/health`
-- the README reviewer path now points reviewers to README and QA first, with the technical spec framed explicitly as Milestone 6 architecture context
-- the README now has a dedicated `Known Limitations / Tradeoffs` section for reviewer scanning
-- local packaging now sets an explicit `turbopack.root`, so `npm run build` no longer warns about the wrong workspace root
+- mock orders import into RetailCRM with stable ids
+- RetailCRM orders sync into Supabase with duplicate-safe reruns
+- high-value Telegram alerts are deduplicated through `notification_log`
+- public dashboard renders real Supabase data on `/`
+- public ops summary is available on `/api/ops-summary`
+- reviewer-facing docs were tightened to reduce friction and overstatement
 
 ## Validation status
 
-- completed in this session:
-  - remove public milestone labeling from the dashboard and `/api/health`
-  - tighten the README reviewer path wording
-  - add a dedicated README tradeoffs section
-  - set an explicit `turbopack.root` in `next.config.ts`
-  - `npm run typecheck`
-  - `npm run build`
-  - `vercel --prod --yes`
-  - `npm audit --audit-level=low`
-  - `curl -sSL https://gbc-test-rho.vercel.app/api/health`
-  - `curl -sSL https://gbc-test-rho.vercel.app`
-- completed earlier in the final prep pass:
-  - `npm run import:mock-orders -- --dry-run`
-  - read-only Supabase REST sanity check for recent orders, missing `external_item_id`, and `notification_log` status counts
-- final submission checklist is now reflected in `SUBMISSION_CHECKLIST.md`
+- `npm run typecheck`
+- `npm run build`
+- `npm audit --audit-level=low`
+- `npm run import:mock-orders -- --dry-run`
+- `curl -sS https://gbc-test-rho.vercel.app/api/health`
+- `curl -sS https://gbc-test-rho.vercel.app/api/ops-summary`
+- `curl -sS https://gbc-test-rho.vercel.app`
 
 ## Open issues / risks
 
-- live sync mutation was not rerun in the deploy session to avoid unnecessary side effects
-- live Telegram send mutation was not rerun in the deploy session for the same reason
-- the public page is reachable, but reviewer-visible data freshness still depends on the current connected Supabase project state
+- live sync mutation was intentionally not rerun in the final pass
+- live Telegram send mutation was intentionally not rerun in the final pass
+- public metrics remain dependent on the current Supabase dataset
 
 ## Exact next prompt
 
-Submission is ready. If another narrow follow-up is needed, use:
-
-Review the final GBEMPIRE submission in /Users/admin/projects/gbc_test as an external reviewer: check the public URL, README, technical spec, scripts, and QA story for clarity and honesty, but do not change business logic unless you find a real blocker.
+Review the final GBEMPIRE submission in /Users/admin/projects/gbc_test as an external reviewer: focus on acceptance risk, reviewer friction, product realism, AI-tool maturity, and trust, but do not change business logic unless you find a real blocker.

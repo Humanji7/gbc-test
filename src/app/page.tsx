@@ -26,10 +26,29 @@ function formatDate(value: string | null): string {
   }).format(new Date(value));
 }
 
+function formatNotificationStatus(
+  value: "sending" | "sent" | "failed" | "delivery_unknown"
+): string {
+  if (value === "sending") {
+    return "В обработке";
+  }
+
+  if (value === "sent") {
+    return "Доставлен";
+  }
+
+  if (value === "failed") {
+    return "Ошибка";
+  }
+
+  return "Нужна ручная проверка";
+}
+
 export default async function HomePage() {
   const publicEnv = getPublicEnv();
   const dashboard = await getDashboardSnapshot();
   const hasOrders = dashboard.totalOrders > 0;
+  const operations = dashboard.operations;
   const kpis = [
     {
       label: "Всего заказов",
@@ -50,6 +69,28 @@ export default async function HomePage() {
       label: `Крупные заказы (>= ${projectConfig.highValueOrderThreshold})`,
       value: String(dashboard.highValueOrders),
       note: "Заказы, которые сейчас попадают под Telegram-алерт."
+    }
+  ] as const;
+  const operationsKpis = [
+    {
+      label: "Статус операций",
+      value: operations.syncStatusLabel,
+      note: "Короткий итог по sync и alert-состояниям."
+    },
+    {
+      label: "Последний успешный sync",
+      value: formatDate(operations.lastSuccessfulSyncAt),
+      note: "Когда последний полный прогон был подтверждён как успешный."
+    },
+    {
+      label: "delivery_unknown",
+      value: String(operations.notificationCounts.deliveryUnknown),
+      note: "Алерты, где возможна доставка без подтверждённой финализации."
+    },
+    {
+      label: "failed + sending",
+      value: `${operations.notificationCounts.failed} / ${operations.notificationCounts.sending}`,
+      note: "Сначала ошибки, затем алерты, которые прямо сейчас в обработке."
     }
   ] as const;
 
@@ -90,7 +131,91 @@ export default async function HomePage() {
         ))}
       </section>
 
+      <section className="kpi-grid" aria-label="Операционный статус">
+        {operationsKpis.map((kpi) => (
+          <article className="kpi-card" key={kpi.label}>
+            <p>{kpi.label}</p>
+            <strong>{kpi.value}</strong>
+            <span>{kpi.note}</span>
+          </article>
+        ))}
+      </section>
+
       <section className="panel-list">
+        <article className="panel">
+          <div className="panel-heading">
+            <div>
+              <span className="panel-kicker">Операции</span>
+              <h2>Что требует внимания</h2>
+            </div>
+            <span className="panel-caption">
+              Последняя активность по алертам: {formatDate(operations.latestAlertActivity)}
+            </span>
+          </div>
+          <div className="attention-list">
+            {operations.attentionItems.map((item) => (
+              <article className={`attention-card attention-${item.severity}`} key={item.title}>
+                <div className="attention-heading">
+                  <strong>{item.title}</strong>
+                  <span>{item.severity === "critical" ? "Критично" : item.severity === "warning" ? "Внимание" : "Норма"}</span>
+                </div>
+                <p>{item.detail}</p>
+                <p className="attention-action">{item.action}</p>
+              </article>
+            ))}
+          </div>
+        </article>
+
+        <article className="panel">
+          <div className="panel-heading">
+            <div>
+              <span className="panel-kicker">Алерты</span>
+              <h2>Последние notification events</h2>
+            </div>
+            <span className="panel-caption">
+              Структурированный срез для оператора и AI-агента
+            </span>
+          </div>
+          {operations.recentNotificationEvents.length > 0 ? (
+            <table className="metric-table">
+              <thead>
+                <tr>
+                  <th scope="col">Заказ</th>
+                  <th scope="col">Статус заказа</th>
+                  <th scope="col">Статус алерта</th>
+                  <th scope="col">Сумма</th>
+                  <th scope="col">Обновлен</th>
+                </tr>
+              </thead>
+              <tbody>
+                {operations.recentNotificationEvents.map((event) => (
+                  <tr key={`${event.orderExternalId}:${event.updatedAt}`}>
+                    <td data-label="Заказ">
+                      <div className="order-cell">
+                        <strong>{event.orderNumber}</strong>
+                        <span>{event.orderExternalId}</span>
+                      </div>
+                    </td>
+                    <td data-label="Статус заказа">{event.orderStatus}</td>
+                    <td data-label="Статус алерта">
+                      <div className="order-cell">
+                        <strong>{formatNotificationStatus(event.notificationStatus)}</strong>
+                        <span>{event.reason ?? "Без дополнительного комментария."}</span>
+                      </div>
+                    </td>
+                    <td data-label="Сумма">{formatCurrency(event.totalAmount, event.currency)}</td>
+                    <td data-label="Обновлен">{formatDate(event.updatedAt)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p className="empty-copy">
+              История alert-статусов пока пустая. После первого run здесь появится операционный след.
+            </p>
+          )}
+        </article>
+
         <article className="panel">
           <div className="panel-heading">
             <div>

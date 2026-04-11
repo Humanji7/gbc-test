@@ -120,16 +120,20 @@ function buildNotificationKey(externalId: string): string {
 
 function formatAlertMessage(order: QualifyingOrderRow, threshold: number): string {
   const totalAmount = coerceMoney(order.total_amount, `Supabase order ${order.external_id} total_amount`);
+  const orderLabel = order.order_number?.trim() || order.external_id;
 
   return [
     "GBEMPIRE high-value order alert",
-    `Order: ${order.external_id}`,
+    `Order: ${orderLabel}`,
+    `External ID: ${order.external_id}`,
     `Amount: ${formatMoney(totalAmount, order.currency)}`,
     `Threshold: >= ${threshold.toFixed(2)}`,
+    "Reason: Order total exceeds the configured high-value threshold.",
     `Status: ${order.status}`,
     `Customer: ${maskCustomerName(order.customer_first_name, order.customer_last_name)}`,
     `City: ${order.city ?? "n/a"}`,
-    `Created at source: ${order.created_at_source ?? "n/a"}`
+    `Created at source: ${order.created_at_source ?? "n/a"}`,
+    "Next step: Review the order in CRM and confirm that priority handling is needed."
   ].join("\n");
 }
 

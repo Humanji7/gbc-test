@@ -287,6 +287,65 @@ a {
   max-width: 62ch;
 }
 
+.attention-list {
+  display: grid;
+  gap: 14px;
+}
+
+.attention-card {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%);
+}
+
+.attention-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 12px;
+}
+
+.attention-heading strong {
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.attention-heading span,
+.attention-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.attention-heading span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.attention-action {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.attention-critical {
+  border-color: #d48768;
+  background: linear-gradient(180deg, #fff4ef 0%, #fff8f3 100%);
+}
+
+.attention-warning {
+  border-color: #d6b46a;
+  background: linear-gradient(180deg, #fff9ec 0%, #fffdf6 100%);
+}
+
+.attention-ok {
+  border-color: #8fbba7;
+  background: linear-gradient(180deg, #f1fbf6 0%, #f9fdfb 100%);
+}
+
 .metric-table td:last-child,
 .metric-table td:nth-last-child(2) {
   font-variant-numeric: tabular-nums lining-nums;
